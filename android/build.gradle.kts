@@ -1,4 +1,5 @@
 import com.mocoding.pokedex.Configuration
+import com.mocoding.pokedex.Deps
 
 plugins {
     id("com.android.application")
@@ -48,4 +49,9 @@ dependencies {
     implementation("androidx.compose.foundation:foundation:1.3.1")
     implementation("androidx.compose.material:material:1.3.1")
     implementation("androidx.activity:activity-compose:1.6.1")
+
+    // Koin
+    with(Deps.Koin) {
+        api(android)
+    }
 }

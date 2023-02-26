@@ -8,18 +8,35 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.mocoding.pokedex.Greeting
+import com.arkivanov.decompose.defaultComponentContext
+import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
+import com.mocoding.pokedex.core.di.initKoin
+import com.mocoding.pokedex.ui.root.RootComponent
+import com.mocoding.pokedex.ui.root.RootContent
+import org.koin.android.ext.koin.androidContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val koin = initKoin {
+            androidContext(this@MainActivity)
+        }.koin
+        
+        val rootComponent =
+            RootComponent(
+                componentContext = defaultComponentContext(),
+                storeFactory = DefaultStoreFactory(),
+                pokemonRepository = koin.get()
+            )
+
         setContent {
             MyApplicationTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    GreetingView(Greeting().greet())
+                    RootContent(component = rootComponent)
                 }
             }
         }

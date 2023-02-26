@@ -1,7 +1,9 @@
 package com.mocoding.pokedex.core.network.client
 
+import com.mocoding.pokedex.core.model.PokemonInfo
 import com.mocoding.pokedex.core.network.NetworkConstants
 import com.mocoding.pokedex.core.network.helper.handleErrors
+import com.mocoding.pokedex.core.network.model.PokemonResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.http.ContentType
@@ -14,14 +16,13 @@ class PokemonClient: KoinComponent {
     private val httpClient by inject<HttpClient>()
 
     suspend fun getPokemonList(
-        limit: Int = 20,
-        offset: Int = 0
-    ): String {
+        page: Int,
+    ): PokemonResponse {
         return handleErrors {
             httpClient.get(NetworkConstants.Pokemon.route) {
                 url {
-                    parameters.append("limit", limit.toString())
-                    parameters.append("offset", offset.toString())
+                    parameters.append("limit", PageSize.toString())
+                    parameters.append("offset", (page * PageSize).toString())
                 }
                 contentType(ContentType.Application.Json)
             }
@@ -30,12 +31,16 @@ class PokemonClient: KoinComponent {
 
     suspend fun getPokemonByName(
         name: String,
-    ): String {
+    ): PokemonInfo {
         return handleErrors {
             httpClient.get(NetworkConstants.Pokemon.byName(name)) {
                 contentType(ContentType.Application.Json)
             }
         }
+    }
+
+    companion object {
+        private const val PageSize = 20
     }
 
 }

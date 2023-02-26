@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import com.mocoding.pokedex.Configuration
 import com.mocoding.pokedex.Deps
 
@@ -7,6 +8,7 @@ plugins {
     kotlin("plugin.serialization")
     id("com.android.library")
     id("org.jetbrains.compose")
+    id("kotlin-parcelize")
     id("app.cash.sqldelight")
 }
 
@@ -31,7 +33,12 @@ kotlin {
         podfile = project.file("../ios/Podfile")
         framework {
             baseName = "shared"
+            binaryOption("bundleId", "com.mocoding.pokedex.shared")
         }
+
+        // Maps custom Xcode configuration to NativeBuildType
+        xcodeConfigurationToNativeBuildType["CUSTOM_DEBUG"] = NativeBuildType.DEBUG
+        xcodeConfigurationToNativeBuildType["CUSTOM_RELEASE"] = NativeBuildType.RELEASE
     }
     
     sourceSets {
@@ -71,12 +78,13 @@ kotlin {
                 with(Deps.ArkIvanov.MVIKotlin) {
                     api(mvikotlin)
                     api(mvikotlinMain)
+                    api(mvikotlinExtensionsCoroutines)
                 }
 
                 // Decompose
                 with(Deps.ArkIvanov.Decompose) {
                     api(decompose)
-//                    api(extensionsCompose)
+                    api(extensionsCompose)
                 }
             }
         }
