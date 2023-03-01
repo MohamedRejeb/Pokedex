@@ -14,15 +14,8 @@ plugins {
 
 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
 kotlin {
-    android {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
-    }
-    iosX64()
-    iosArm64()
+    android()
+    ios()
     iosSimulatorArm64()
 
     cocoapods {
@@ -33,12 +26,11 @@ kotlin {
         podfile = project.file("../ios/Podfile")
         framework {
             baseName = "shared"
-            binaryOption("bundleId", "com.mocoding.pokedex.shared")
-        }
 
-        // Maps custom Xcode configuration to NativeBuildType
-        xcodeConfigurationToNativeBuildType["CUSTOM_DEBUG"] = NativeBuildType.DEBUG
-        xcodeConfigurationToNativeBuildType["CUSTOM_RELEASE"] = NativeBuildType.RELEASE
+            // Optional properties
+            // Specify the framework linking type. It's dynamic by default.
+            isStatic = true
+        }
     }
     
     sourceSets {
@@ -49,7 +41,7 @@ kotlin {
                     api(runtime)
                     api(foundation)
                     api(material)
-                    api(material3)
+//                    api(material3)
                 }
 
                 // Ktor
@@ -104,14 +96,9 @@ kotlin {
             }
         }
         val androidUnitTest by getting
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by creating {
+
+        val iosMain by getting {
             dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
 
             dependencies {
                 // Ktor
@@ -123,14 +110,14 @@ kotlin {
                 implementation(Deps.CashApp.SQLDelight.nativeDriver)
             }
         }
-        val iosX64Test by getting
-        val iosArm64Test by getting
-        val iosSimulatorArm64Test by getting
-        val iosTest by creating {
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosMain)
+        }
+        val iosTest by getting {
             dependsOn(commonTest)
-            iosX64Test.dependsOn(this)
-            iosArm64Test.dependsOn(this)
-            iosSimulatorArm64Test.dependsOn(this)
+        }
+        val iosSimulatorArm64Test by getting {
+            dependsOn(iosTest)
         }
     }
 }

@@ -1,14 +1,5 @@
-import SwiftUI
+import UIKit
 import shared
-
-//@main
-//struct iOSApp: App {
-//	var body: some Scene {
-//		WindowGroup {
-//			ContentView()
-//		}
-//	}
-//}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

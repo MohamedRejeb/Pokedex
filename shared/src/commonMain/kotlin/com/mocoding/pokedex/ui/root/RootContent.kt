@@ -8,7 +8,7 @@ import com.mocoding.pokedex.ui.details.DetailsContent
 import com.mocoding.pokedex.ui.main.MainContent
 
 @Composable
-fun RootContent(component: RootComponent) {
+internal fun RootContent(component: RootComponent) {
     Children(
         stack = component.childStack,
         animation = stackAnimation(fade()),
