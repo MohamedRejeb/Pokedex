@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Pokemon(
-  var page: Int = 0,
+  var page: Long = 0,
   val name: String,
   val url: String
 ) {

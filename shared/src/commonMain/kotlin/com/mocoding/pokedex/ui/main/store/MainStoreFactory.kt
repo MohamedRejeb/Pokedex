@@ -6,7 +6,6 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import com.mocoding.pokedex.core.model.Pokemon
-import com.mocoding.pokedex.core.network.errors.PokedexException
 import com.mocoding.pokedex.data.repository.PokemonRepository
 import com.mocoding.pokedex.pokedexDispatchers
 import kotlinx.coroutines.launch
@@ -41,15 +40,18 @@ internal class MainStoreFactory(
                 is MainStore.Intent.LoadPokemonListByPage -> loadPokemonListByPage(intent.page)
             }
 
-        private fun loadPokemonListByPage(page: Int) {
+        private fun loadPokemonListByPage(page: Long) {
             scope.launch {
                 dispatch(Msg.PokemonListLoading)
-                try {
-                    val pokemonList = pokemonRepository.getPokemonList(page)
-                    dispatch(Msg.PokemonListLoaded(pokemonList))
-                } catch (e: PokedexException) {
-                    dispatch(Msg.PokemonListFailed(e.message))
-                }
+
+                pokemonRepository
+                    .getPokemonList(page)
+                    .onSuccess { pokemonList ->
+                        dispatch(Msg.PokemonListLoaded(pokemonList))
+                    }
+                    .onFailure { e ->
+                        dispatch(Msg.PokemonListFailed(e.message))
+                    }
             }
         }
     }

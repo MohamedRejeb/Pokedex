@@ -16,7 +16,7 @@ class PokemonClient: KoinComponent {
     private val httpClient by inject<HttpClient>()
 
     suspend fun getPokemonList(
-        page: Int,
+        page: Long,
     ): PokemonResponse {
         return handleErrors {
             httpClient.get(NetworkConstants.Pokemon.route) {

@@ -42,6 +42,7 @@ object Deps {
             const val sqljsDriver = "app.cash.sqldelight:sqljs-driver:${Versions.sqlDelight}"
 
             const val coroutinesExtensions = "app.cash.sqldelight:coroutines-extensions:${Versions.sqlDelight}"
+            const val primitiveAdapters = "app.cash.sqldelight:primitive-adapters:${Versions.sqlDelight}"
         }
     }
 

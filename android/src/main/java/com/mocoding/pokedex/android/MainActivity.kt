@@ -20,7 +20,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val koin = initKoin {
-            androidContext(this@MainActivity)
+            println("init koin")
+            androidContext(applicationContext)
         }.koin
         
         val rootComponent =

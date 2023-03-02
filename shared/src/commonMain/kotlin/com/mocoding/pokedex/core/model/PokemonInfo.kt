@@ -1,15 +1,16 @@
 package com.mocoding.pokedex.core.model
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.random.Random
 
 @Serializable
 data class PokemonInfo(
-  val id: Int,
+  val id: Long,
   val name: String,
-  val height: Int,
-  val weight: Int,
-  val experience: Int,
+  val height: Long,
+  val weight: Long,
+  @SerialName("base_experience") val experience: Long,
   val types: List<TypeResponse>,
   val hp: Int = Random.nextInt(maxHp),
   val attack: Int = Random.nextInt(maxAttack),

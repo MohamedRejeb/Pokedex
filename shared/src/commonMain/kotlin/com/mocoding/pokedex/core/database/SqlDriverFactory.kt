@@ -1,16 +1,14 @@
 package com.mocoding.pokedex.core.database
 
 import app.cash.sqldelight.db.SqlDriver
+import org.koin.core.scope.Scope
 
-//expect class SqlDriverFactory() {
-//    fun createDriver(): SqlDriver
-//}
+expect fun Scope.sqlDriverFactory(): SqlDriver
+fun createDatabase(driver: SqlDriver): PokemonDatabase {
+    println("database created")
+    val database = PokemonDatabase(
+        driver = driver,
+    )
 
-//fun createDatabase(sqlDriverFactory: SqlDriverFactory): Database {
-//    val driver = sqlDriverFactory.createDriver()
-//    val database = Database(
-//        driver = driver,
-//    )
-//
-//    return database
-//}
+    return database
+}

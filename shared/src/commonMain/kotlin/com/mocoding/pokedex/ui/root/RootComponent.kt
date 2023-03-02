@@ -70,7 +70,7 @@ class RootComponent internal constructor(
 
     private fun onDetailsOutput(output: DetailsComponent.Output): Unit =
         when (output) {
-            is DetailsComponent.Output.Finished -> navigation.pop()
+            is DetailsComponent.Output.Back -> navigation.pop()
         }
 
     private sealed class Configuration: Parcelable {

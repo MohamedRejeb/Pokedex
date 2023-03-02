@@ -8,7 +8,7 @@ import com.mocoding.pokedex.core.model.Pokemon
 internal interface MainStore: Store<MainStore.Intent, MainStore.State, Nothing> {
 
     sealed class Intent {
-        data class LoadPokemonListByPage(val page: Int): Intent()
+        data class LoadPokemonListByPage(val page: Long): Intent()
     }
 
     data class State(

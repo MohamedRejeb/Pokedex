@@ -1,0 +1,14 @@
+CREATE TABLE pokemonEntity (
+  page INTEGER NOT NULL,
+  name TEXT NOT NULL PRIMARY KEY,
+  url TEXT NOT NULL
+);
+
+selectAllByPage:
+SELECT *
+FROM pokemonEntity
+WHERE page = :page;
+
+insert:
+INSERT OR REPLACE INTO pokemonEntity(page, name, url)
+VALUES ?;

@@ -27,6 +27,10 @@ class MainComponent(
 
     val state: Flow<MainState> = mainStore.states.map { it.toMainState() }
 
+    fun onOutput(output: Output) {
+        output(output)
+    }
+
     sealed class Output {
         data class Selected(val name: String) : Output()
     }

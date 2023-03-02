@@ -13,6 +13,7 @@ internal fun RootContent(component: RootComponent) {
         stack = component.childStack,
         animation = stackAnimation(fade()),
     ) {
+        it
         when(val child = it.instance) {
             is RootComponent.Child.Main -> MainContent(child.component)
             is RootComponent.Child.Details -> DetailsContent(child.component)

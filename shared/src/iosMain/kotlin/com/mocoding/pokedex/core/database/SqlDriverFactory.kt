@@ -2,9 +2,9 @@ package com.mocoding.pokedex.core.database
 
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.native.NativeSqliteDriver
+import org.koin.core.scope.Scope
 
-//actual class SqlDriverFactory {
-//    actual fun createDriver(): SqlDriver {
-//        return NativeSqliteDriver(Database.Schema, "database.db")
-//    }
-//}
+
+actual fun Scope.sqlDriverFactory(): SqlDriver {
+    return NativeSqliteDriver(PokemonDatabase.Schema, "${DatabaseConstants.name}.db")
+}

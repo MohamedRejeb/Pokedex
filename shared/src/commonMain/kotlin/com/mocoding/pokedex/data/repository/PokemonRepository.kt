@@ -5,8 +5,8 @@ import com.mocoding.pokedex.core.model.PokemonInfo
 
 interface PokemonRepository {
 
-    suspend fun getPokemonList(page: Int): List<Pokemon>
+    suspend fun getPokemonList(page: Long): Result<List<Pokemon>>
 
-    suspend fun getPokemonByName(name: String): PokemonInfo
+    suspend fun getPokemonByName(name: String): Result<PokemonInfo>
 
 }

@@ -52,7 +52,10 @@ kotlin {
                 }
 
                 // SqlDelight
-                implementation(Deps.CashApp.SQLDelight.coroutinesExtensions)
+                with(Deps.CashApp.SQLDelight) {
+                    api(coroutinesExtensions)
+                    api(primitiveAdapters)
+                }
 
                 // Koin
                 with(Deps.Koin) {
@@ -60,7 +63,7 @@ kotlin {
                     api(test)
                 }
 
-                // KotlinX Serialization
+                // KotlinX Serialization Json
                 implementation(Deps.Org.JetBrains.Kotlinx.kotlinxSerializationJson)
 
                 // Coroutines
@@ -89,10 +92,12 @@ kotlin {
             dependencies {
                 // Ktor
                 implementation(Deps.Io.Ktor.ktorClientAndroid)
-                implementation(Deps.Io.Ktor.ktorClientOkhttp)
 
                 // SqlDelight
                 implementation(Deps.CashApp.SQLDelight.androidDriver)
+
+                // Koin
+                implementation(Deps.Koin.android)
             }
         }
         val androidUnitTest by getting
@@ -135,8 +140,9 @@ android {
 
 sqldelight {
     databases {
-        create("Database") {
+        create("PokemonDatabase") {
             packageName.set("com.mocoding.pokedex.core.database")
+            //generateAsync.set(true)
         }
     }
 }

@@ -6,7 +6,6 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import com.mocoding.pokedex.core.model.PokemonInfo
-import com.mocoding.pokedex.core.network.errors.PokedexException
 import com.mocoding.pokedex.data.repository.PokemonRepository
 import com.mocoding.pokedex.pokedexDispatchers
 import kotlinx.coroutines.launch
@@ -45,12 +44,15 @@ internal class DetailsStoreFactory(
         private fun loadPokemonInfoByName(name: String) {
             scope.launch {
                 dispatch(Msg.PokemonInfoLoading)
-                try {
-                    val pokemonInfo = pokemonRepository.getPokemonByName(name)
-                    dispatch(Msg.PokemonInfoLoaded(pokemonInfo))
-                } catch (e: PokedexException) {
-                    dispatch(Msg.PokemonInfoFailed(e.message))
-                }
+
+                pokemonRepository
+                    .getPokemonByName(name)
+                    .onSuccess { pokemonInfo ->
+                        Msg.PokemonInfoLoaded(pokemonInfo)
+                    }
+                    .onFailure { e ->
+                        dispatch(Msg.PokemonInfoFailed(e.message))
+                    }
             }
         }
     }
