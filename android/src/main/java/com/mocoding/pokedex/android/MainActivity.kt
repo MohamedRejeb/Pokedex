@@ -36,14 +36,7 @@ class MainActivity : ComponentActivity() {
             )
 
         setContent {
-            MyApplicationTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    ContentView(component = rootComponent)
-                }
-            }
+            ContentView(component = rootComponent)
         }
     }
 

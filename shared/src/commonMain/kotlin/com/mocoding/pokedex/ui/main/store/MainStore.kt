@@ -8,13 +8,11 @@ import com.mocoding.pokedex.core.model.Pokemon
 interface MainStore: Store<MainStore.Intent, MainStore.State, Nothing> {
 
     sealed class Intent {
-        data class LoadPokemonListByPage(val page: Long): Intent()
+        data class InputPokemonSearch(val search: String): Intent()
     }
 
     data class State(
-        val isLoading: Boolean = false,
-        val error: String? = null,
-        val pokemonList: List<Pokemon> = emptyList()
+        val search: String = "",
     )
 
 }

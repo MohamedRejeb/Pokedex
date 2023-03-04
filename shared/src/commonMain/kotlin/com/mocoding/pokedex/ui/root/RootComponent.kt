@@ -13,11 +13,13 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.mocoding.pokedex.data.repository.PokemonRepository
 import com.mocoding.pokedex.ui.details.DetailsComponent
 import com.mocoding.pokedex.ui.main.MainComponent
+import com.mocoding.pokedex.ui.pokedex.PokedexComponent
 
 class RootComponent internal constructor(
     componentContext: ComponentContext,
     private val main: (ComponentContext, (MainComponent.Output) -> Unit) -> MainComponent,
-    private val details: (ComponentContext, pokemonName: String, (DetailsComponent.Output) -> Unit) -> DetailsComponent
+    private val pokedex: (ComponentContext, searchValue: String, (PokedexComponent.Output) -> Unit) -> PokedexComponent,
+    private val details: (ComponentContext, pokemonName: String, (DetailsComponent.Output) -> Unit) -> DetailsComponent,
 ): ComponentContext by componentContext {
 
     constructor(
@@ -30,7 +32,15 @@ class RootComponent internal constructor(
             MainComponent(
                 componentContext = childContext,
                 storeFactory = storeFactory,
+                output = output
+            )
+        },
+        pokedex = { childContext, searchValue, output ->
+            PokedexComponent(
+                componentContext = childContext,
+                storeFactory = storeFactory,
                 pokemonRepository = pokemonRepository,
+                searchValue = searchValue,
                 output = output
             )
         },
@@ -42,7 +52,7 @@ class RootComponent internal constructor(
                 pokemonName = pokemonName,
                 output = output
             )
-        }
+        },
     )
 
     private val navigation = StackNavigation<Configuration>()
@@ -60,12 +70,19 @@ class RootComponent internal constructor(
     private fun createChild(configuration: Configuration, componentContext: ComponentContext): Child =
         when (configuration) {
             is Configuration.Main -> Child.Main(main(componentContext, ::onMainOutput))
+            is Configuration.Pokedex -> Child.Pokedex(pokedex(componentContext, configuration.searchValue, ::onPokedexOutput))
             is Configuration.Details -> Child.Details(details(componentContext, configuration.pokemonName, ::onDetailsOutput))
         }
 
     private fun onMainOutput(output: MainComponent.Output): Unit =
         when (output) {
-            is MainComponent.Output.PokemonClicked -> navigation.push(Configuration.Details(pokemonName = output.name))
+            MainComponent.Output.PokedexClicked -> navigation.push(Configuration.Pokedex())
+            is MainComponent.Output.PokedexSearchSubmitted -> navigation.push(Configuration.Pokedex(output.searchValue))
+        }
+
+    private fun onPokedexOutput(output: PokedexComponent.Output): Unit =
+        when (output) {
+            is PokedexComponent.Output.PokemonClicked -> navigation.push(Configuration.Details(output.name))
         }
 
     private fun onDetailsOutput(output: DetailsComponent.Output): Unit =
@@ -78,11 +95,14 @@ class RootComponent internal constructor(
         object Main : Configuration()
 
         @Parcelize
+        data class Pokedex(val searchValue: String = "") : Configuration()
+        @Parcelize
         data class Details(val pokemonName: String) : Configuration()
     }
 
     sealed class Child {
         data class Main(val component: MainComponent) : Child()
+        data class Pokedex(val component: PokedexComponent) : Child()
         data class Details(val component: DetailsComponent) : Child()
     }
 

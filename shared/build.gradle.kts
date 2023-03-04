@@ -26,9 +26,6 @@ kotlin {
         podfile = project.file("../ios/Podfile")
         framework {
             baseName = "shared"
-
-            // Optional properties
-            // Specify the framework linking type. It's dynamic by default.
             isStatic = true
         }
     }
@@ -42,6 +39,7 @@ kotlin {
                     api(foundation)
                     api(material)
                     api(material3)
+                    api(materialIconsExtended)
                 }
 
                 // Ktor
@@ -157,7 +155,6 @@ sqldelight {
     databases {
         create("PokemonDatabase") {
             packageName.set("com.mocoding.pokedex.core.database")
-            //generateAsync.set(true)
         }
     }
 }

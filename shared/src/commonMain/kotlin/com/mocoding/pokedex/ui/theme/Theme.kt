@@ -8,33 +8,35 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Blue400,
-    secondary = Blue500,
+    primary = Red400,
+    secondary = Green400,
+    tertiary = Blue400,
 
-    background = DarkBlue700,
-    surface = DarkBlue500,
-    surfaceVariant = DarkBlue400,
+    background = Black,
+    surface = DarkGray400,
+    surfaceVariant = Gray400,
     onPrimary = Color.White,
-    onSecondary = LightGray200,
-    onBackground = LightGray200,
-    onSurface = LightGray200,
-    onSurfaceVariant = LightGray300,
-    outline = Gray400
+    onSecondary = Color.White,
+    onBackground = Color.White,
+    onSurface = Color.White,
+    onSurfaceVariant = LightGray400,
+    outline = LightGray400
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Blue400,
-    secondary = Blue500,
+    primary = Red400,
+    secondary = Green400,
+    tertiary = Blue400,
 
-    background = DarkBlue700,
-    surface = DarkBlue500,
-    surfaceVariant = DarkBlue400,
+    background = Color.White,
+    surface = LightGray400,
+    surfaceVariant = Gray400,
     onPrimary = Color.White,
-    onSecondary = LightGray200,
-    onBackground = LightGray200,
-    onSurface = LightGray200,
-    onSurfaceVariant = LightGray300,
-    outline = Gray400
+    onSecondary = Color.White,
+    onBackground = Black,
+    onSurface = Black,
+    onSurfaceVariant = DarkGray400,
+    outline = LightGray400
 )
 
 @Composable

@@ -1,33 +1,36 @@
-package com.mocoding.pokedex.ui.main
+package com.mocoding.pokedex.ui.pokedex
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
 import com.mocoding.pokedex.data.repository.PokemonRepository
-import com.mocoding.pokedex.ui.main.store.MainStore
-import com.mocoding.pokedex.ui.main.store.MainStoreFactory
+import com.mocoding.pokedex.ui.pokedex.store.PokedexStore
+import com.mocoding.pokedex.ui.pokedex.store.PokedexStoreFactory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.StateFlow
 
-class MainComponent(
+class PokedexComponent(
     componentContext: ComponentContext,
     storeFactory: StoreFactory,
+    pokemonRepository: PokemonRepository,
+    searchValue: String,
     private val output: (Output) -> Unit
 ): ComponentContext by componentContext {
 
-    private val mainStore =
+    private val pokedexStore =
         instanceKeeper.getStore {
-            MainStoreFactory(
+            PokedexStoreFactory(
                 storeFactory = storeFactory,
+                searchValue = searchValue,
             ).create()
         }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val state: StateFlow<MainStore.State> = mainStore.stateFlow
+    val state: StateFlow<PokedexStore.State> = pokedexStore.stateFlow
 
-    fun onEvent(event: MainStore.Intent) {
-        mainStore.accept(event)
+    fun onEvent(event: PokedexStore.Intent) {
+        pokedexStore.accept(event)
     }
 
     fun onOutput(output: Output) {
@@ -35,8 +38,7 @@ class MainComponent(
     }
 
     sealed class Output {
-        object PokedexClicked : Output()
-        data class PokedexSearchSubmitted(val searchValue: String) : Output()
+        data class PokemonClicked(val name: String) : Output()
     }
 
 }

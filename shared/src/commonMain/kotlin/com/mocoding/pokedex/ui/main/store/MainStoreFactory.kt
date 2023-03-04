@@ -13,7 +13,6 @@ import kotlinx.coroutines.launch
 
 internal class MainStoreFactory(
     private val storeFactory: StoreFactory,
-    private val pokemonRepository: PokemonRepository,
 ) {
     fun create(): MainStore =
         object : MainStore, Store<MainStore.Intent, MainStore.State, Nothing> by storeFactory.create(
@@ -25,47 +24,22 @@ internal class MainStoreFactory(
         ) {}
 
     private sealed class Msg {
-        object PokemonListLoading : Msg()
-        data class PokemonListLoaded(val pokemonList: List<Pokemon>) : Msg()
-        data class PokemonListFailed(val error: String?) : Msg()
+        data class PokemonSearchChanged(val search: String) : Msg()
     }
 
     private inner class ExecutorImpl : CoroutineExecutor<MainStore.Intent, Unit, MainStore.State, Msg, Nothing>(
         pokedexDispatchers.main) {
-        override fun executeAction(action: Unit, getState: () -> MainStore.State) {
-            loadPokemonListByPage(page = 1)
-        }
 
         override fun executeIntent(intent: MainStore.Intent, getState: () -> MainStore.State): Unit =
             when (intent) {
-                is MainStore.Intent.LoadPokemonListByPage -> loadPokemonListByPage(intent.page)
+                is MainStore.Intent.InputPokemonSearch -> dispatch(Msg.PokemonSearchChanged(intent.search))
             }
-
-        private var loadPokemonListByPageJob: Job? = null
-        private fun loadPokemonListByPage(page: Long) {
-            if (loadPokemonListByPageJob?.isActive == true) return
-
-            loadPokemonListByPageJob = scope.launch {
-                dispatch(Msg.PokemonListLoading)
-
-                pokemonRepository
-                    .getPokemonList(page)
-                    .onSuccess { pokemonList ->
-                        dispatch(Msg.PokemonListLoaded(pokemonList))
-                    }
-                    .onFailure { e ->
-                        dispatch(Msg.PokemonListFailed(e.message))
-                    }
-            }
-        }
     }
 
     private object ReducerImpl: Reducer<MainStore.State, Msg> {
         override fun MainStore.State.reduce(msg: Msg): MainStore.State =
             when (msg) {
-                is Msg.PokemonListLoading -> copy(isLoading = true)
-                is Msg.PokemonListLoaded -> MainStore.State(pokemonList = pokemonList + msg.pokemonList)
-                is Msg.PokemonListFailed -> copy(error = msg.error)
+                is Msg.PokemonSearchChanged -> copy(search = msg.search)
             }
     }
 

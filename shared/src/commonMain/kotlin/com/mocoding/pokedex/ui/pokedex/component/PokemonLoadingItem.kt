@@ -1,4 +1,4 @@
-package com.mocoding.pokedex.ui.main.components
+package com.mocoding.pokedex.ui.pokedex.component
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.BorderStroke
@@ -35,7 +35,7 @@ internal fun PokemonLoadingItem(
                 this.alpha = abs(1f - alpha())
             }
             .clip(MaterialTheme.shapes.small)
-            .background(MaterialTheme.colorScheme.primary)
+            .background(MaterialTheme.colorScheme.secondary)
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -51,7 +51,7 @@ internal fun PokemonLoadingItem(
                         this.alpha = alpha()
                     }
                     .clip(MaterialTheme.shapes.small)
-                    .background(MaterialTheme.colorScheme.onPrimary)
+                    .background(MaterialTheme.colorScheme.onSecondary)
             )
 
             Box(
@@ -62,7 +62,7 @@ internal fun PokemonLoadingItem(
                         this.alpha = alpha()
                     }
                     .clip(MaterialTheme.shapes.small)
-                    .background(MaterialTheme.colorScheme.onPrimary)
+                    .background(MaterialTheme.colorScheme.onSecondary)
             )
         }
     }

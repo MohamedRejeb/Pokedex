@@ -1,12 +1,12 @@
-package com.mocoding.pokedex.ui.main.components
+package com.mocoding.pokedex.ui.pokedex.component
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -35,6 +35,7 @@ internal fun PokemonGrid(
         columns = GridCells.Adaptive(140.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
+        contentPadding = PaddingValues(20.dp),
         modifier = modifier,
     ) {
         items(pokemonList, key = { it.name }) { pokemon ->
@@ -47,7 +48,7 @@ internal fun PokemonGrid(
 
         items(5) { index ->
             LaunchedEffect(Unit) {
-                // if (index == 0) loadMoreItems()
+                if (index == 0) loadMoreItems()
             }
 
             PokemonLoadingItem(alpha = { alpha })

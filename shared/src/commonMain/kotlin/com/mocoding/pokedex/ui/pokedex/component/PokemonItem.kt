@@ -1,4 +1,4 @@
-package com.mocoding.pokedex.ui.main.components
+package com.mocoding.pokedex.ui.pokedex.component
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -24,22 +24,19 @@ internal fun PokemonItem(
 ) {
     val painter = rememberAsyncImagePainter(pokemon.imageUrl)
 
-    if (pokemon.name == "spearow") {
-        LaunchedEffect(painter) {
-            println(painter.requestState)
-            println(painter.hashCode())
-        }
-    }
-
-    OutlinedCard(
+    ElevatedCard(
         onClick = onClick,
-        border = BorderStroke(2.dp, MaterialTheme.colorScheme.primary),
+        //border = BorderStroke(2.dp, MaterialTheme.colorScheme.primary),
         shape = MaterialTheme.shapes.small,
+        colors = CardDefaults.elevatedCardColors(
+            containerColor = MaterialTheme.colorScheme.secondary,
+            contentColor = MaterialTheme.colorScheme.onSecondary,
+        ),
         modifier = modifier
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(12.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier.padding(10.dp)
         ) {
             Box(
@@ -57,14 +54,15 @@ internal fun PokemonItem(
 
                 if (painter.requestState is ImageRequestState.Loading
                     || painter.requestState is ImageRequestState.Failure) {
-                    CircularProgressIndicator()
+                    CircularProgressIndicator(
+                        color = MaterialTheme.colorScheme.onSecondary
+                    )
                 }
             }
 
             Text(
                 text = pokemon.name,
-                color = MaterialTheme.colorScheme.onBackground,
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleLarge,
             )
         }
     }
