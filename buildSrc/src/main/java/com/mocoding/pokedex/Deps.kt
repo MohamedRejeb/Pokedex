@@ -24,6 +24,7 @@ object Deps {
             const val ktorClientCore = "io.ktor:ktor-client-core:${Versions.ktor}"
             const val ktorSerializationKotlinxJson = "io.ktor:ktor-serialization-kotlinx-json:${Versions.ktor}"
             const val ktorClientContentNegotiation = "io.ktor:ktor-client-content-negotiation:${Versions.ktor}"
+            const val ktorClientLogging = "io.ktor:ktor-client-logging:${Versions.ktor}"
 
             const val ktorClientAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
             const val ktorClientOkhttp = "io.ktor:ktor-client-okhttp:${Versions.ktor}"
@@ -31,6 +32,10 @@ object Deps {
             const val ktorClientDarwin = "io.ktor:ktor-client-darwin:${Versions.ktor}"
             const val ktorClientIos = "io.ktor:ktor-client-ios:${Versions.ktor}"
         }
+    }
+
+    object Logback {
+        const val logbackClassic = "ch.qos.logback:logback-classic:${Versions.logbackClassic}"
     }
 
     object CashApp {

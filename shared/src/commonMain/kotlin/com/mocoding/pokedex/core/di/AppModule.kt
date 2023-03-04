@@ -9,7 +9,9 @@ import org.koin.dsl.KoinAppDeclaration
 fun initKoin(enableNetworkLogs: Boolean = false, appDeclaration: KoinAppDeclaration = {}) =
     startKoin {
         appDeclaration()
-        modules(databaseModule)
-        modules(networkModule)
-        modules(dataModule)
+        modules(
+            databaseModule,
+            networkModule(enableNetworkLogs),
+            dataModule
+        )
     }

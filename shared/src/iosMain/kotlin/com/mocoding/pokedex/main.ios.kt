@@ -8,6 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Application
+import androidx.compose.ui.window.ComposeUIViewController
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
@@ -28,7 +29,7 @@ fun MainViewController(): UIViewController {
             pokemonRepository = koin.get()
         )
 
-    return Application("Pokedex") {
+    return ComposeUIViewController {
         Column {
             // To skip upper part of screen.
             Box(

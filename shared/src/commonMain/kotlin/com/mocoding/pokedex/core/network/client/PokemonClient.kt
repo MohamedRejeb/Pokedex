@@ -8,12 +8,10 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
-class PokemonClient: KoinComponent {
-
-    private val httpClient by inject<HttpClient>()
+class PokemonClient(
+    private val httpClient: HttpClient
+) {
 
     suspend fun getPokemonList(
         page: Long,

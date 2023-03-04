@@ -49,7 +49,11 @@ kotlin {
                     api(ktorClientCore)
                     api(ktorSerializationKotlinxJson)
                     api(ktorClientContentNegotiation)
+                    api(ktorClientLogging)
                 }
+
+                // Logback for ktor logging
+                implementation(Deps.Logback.logbackClassic)
 
                 // SqlDelight
                 with(Deps.CashApp.SQLDelight) {

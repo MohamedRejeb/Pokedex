@@ -22,7 +22,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val koin = initKoin {
+        val koin = initKoin(
+            enableNetworkLogs = BuildConfig.DEBUG
+        ) {
             androidContext(applicationContext)
         }.koin
         

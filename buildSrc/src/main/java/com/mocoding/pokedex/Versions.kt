@@ -12,4 +12,5 @@ object Versions {
     const val sqlDelight = "2.0.0-alpha05"
     const val koin = "3.2.0"
     const val imageLoader = "1.2.10"
+    const val logbackClassic = "1.2.11"
 }
