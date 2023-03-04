@@ -64,4 +64,8 @@ object Deps {
             const val extensionsCompose = "com.arkivanov.decompose:extensions-compose-jetbrains:${Versions.decompose}"
         }
     }
+
+    object Github {
+        const val imageLoader = "io.github.qdsfdhvh:image-loader:${Versions.imageLoader}"
+    }
 }

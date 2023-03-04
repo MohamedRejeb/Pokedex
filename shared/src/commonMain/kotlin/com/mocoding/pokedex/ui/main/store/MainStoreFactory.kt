@@ -8,6 +8,7 @@ import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import com.mocoding.pokedex.core.model.Pokemon
 import com.mocoding.pokedex.data.repository.PokemonRepository
 import com.mocoding.pokedex.pokedexDispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 internal class MainStoreFactory(
@@ -40,8 +41,11 @@ internal class MainStoreFactory(
                 is MainStore.Intent.LoadPokemonListByPage -> loadPokemonListByPage(intent.page)
             }
 
+        private var loadPokemonListByPageJob: Job? = null
         private fun loadPokemonListByPage(page: Long) {
-            scope.launch {
+            if (loadPokemonListByPageJob?.isActive == true) return
+
+            loadPokemonListByPageJob = scope.launch {
                 dispatch(Msg.PokemonListLoading)
 
                 pokemonRepository
@@ -59,9 +63,9 @@ internal class MainStoreFactory(
     private object ReducerImpl: Reducer<MainStore.State, Msg> {
         override fun MainStore.State.reduce(msg: Msg): MainStore.State =
             when (msg) {
-                is Msg.PokemonListLoading -> MainStore.State(isLoading = true)
-                is Msg.PokemonListLoaded -> MainStore.State(pokemonList = msg.pokemonList)
-                is Msg.PokemonListFailed -> MainStore.State(error = msg.error)
+                is Msg.PokemonListLoading -> copy(isLoading = true)
+                is Msg.PokemonListLoaded -> MainStore.State(pokemonList = pokemonList + msg.pokemonList)
+                is Msg.PokemonListFailed -> copy(error = msg.error)
             }
     }
 

@@ -14,13 +14,15 @@ import com.mocoding.pokedex.ui.ContentView
 import com.mocoding.pokedex.core.di.initKoin
 import com.mocoding.pokedex.ui.root.RootComponent
 import org.koin.android.ext.koin.androidContext
+import org.koin.core.Koin
+import org.koin.core.context.stopKoin
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val koin = initKoin {
-            println("init koin")
             androidContext(applicationContext)
         }.koin
         
@@ -41,5 +43,10 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stopKoin()
     }
 }

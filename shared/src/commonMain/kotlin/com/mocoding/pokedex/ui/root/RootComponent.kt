@@ -65,7 +65,7 @@ class RootComponent internal constructor(
 
     private fun onMainOutput(output: MainComponent.Output): Unit =
         when (output) {
-            is MainComponent.Output.Selected -> navigation.push(Configuration.Details(pokemonName = output.name))
+            is MainComponent.Output.PokemonClicked -> navigation.push(Configuration.Details(pokemonName = output.name))
         }
 
     private fun onDetailsOutput(output: DetailsComponent.Output): Unit =

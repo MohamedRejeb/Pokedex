@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stackAnimation
-import com.mocoding.pokedex.ui.details.DetailsContent
-import com.mocoding.pokedex.ui.main.MainContent
+import com.mocoding.pokedex.ui.details.DetailsScreen
+import com.mocoding.pokedex.ui.main.MainScreen
 
 @Composable
 internal fun RootContent(component: RootComponent) {
@@ -15,8 +15,8 @@ internal fun RootContent(component: RootComponent) {
     ) {
         it
         when(val child = it.instance) {
-            is RootComponent.Child.Main -> MainContent(child.component)
-            is RootComponent.Child.Details -> DetailsContent(child.component)
+            is RootComponent.Child.Main -> MainScreen(child.component)
+            is RootComponent.Child.Details -> DetailsScreen(child.component)
         }
     }
 }
