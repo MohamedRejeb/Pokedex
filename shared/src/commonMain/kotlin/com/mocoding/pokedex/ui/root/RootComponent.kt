@@ -82,7 +82,8 @@ class RootComponent internal constructor(
 
     private fun onPokedexOutput(output: PokedexComponent.Output): Unit =
         when (output) {
-            is PokedexComponent.Output.PokemonClicked -> navigation.push(Configuration.Details(output.name))
+            is PokedexComponent.Output.NavigateBack -> navigation.pop()
+            is PokedexComponent.Output.NavigateToDetails -> navigation.push(Configuration.Details(output.name))
         }
 
     private fun onDetailsOutput(output: DetailsComponent.Output): Unit =

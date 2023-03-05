@@ -38,7 +38,8 @@ class PokedexComponent(
     }
 
     sealed class Output {
-        data class PokemonClicked(val name: String) : Output()
+        object NavigateBack : Output()
+        data class NavigateToDetails(val name: String) : Output()
     }
 
 }
