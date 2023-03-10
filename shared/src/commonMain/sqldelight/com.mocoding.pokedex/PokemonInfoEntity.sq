@@ -4,7 +4,8 @@ CREATE TABLE pokemonInfoEntity (
   height INTEGER NOT NULL,
   weight INTEGER NOT NULL,
   experience INTEGER NOT NULL,
-  types TEXT NOT NULL
+  types TEXT NOT NULL,
+  isFavorite INTEGER DEFAULT 0 NOT NULL
 );
 
 selectOneByName:
@@ -13,5 +14,5 @@ FROM pokemonInfoEntity
 WHERE name = :name;
 
 insert:
-INSERT OR REPLACE INTO pokemonInfoEntity(id, name, height, weight, experience, types)
+INSERT OR REPLACE INTO pokemonInfoEntity(id, name, height, weight, experience, types, isFavorite)
 VALUES ?;

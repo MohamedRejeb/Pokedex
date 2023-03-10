@@ -1,35 +1,32 @@
-package com.mocoding.pokedex.ui.pokedex
+package com.mocoding.pokedex.ui.favorite
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
-import com.mocoding.pokedex.data.repository.PokemonRepository
-import com.mocoding.pokedex.ui.pokedex.store.PokedexStore
-import com.mocoding.pokedex.ui.pokedex.store.PokedexStoreFactory
+import com.mocoding.pokedex.ui.favorite.store.FavoriteStore
+import com.mocoding.pokedex.ui.favorite.store.FavoriteStoreFactory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.StateFlow
 
-class PokedexComponent(
+class FavoriteComponent(
     componentContext: ComponentContext,
     storeFactory: StoreFactory,
-    searchValue: String,
     private val output: (Output) -> Unit
 ): ComponentContext by componentContext {
 
-    private val pokedexStore =
+    private val favoriteStore =
         instanceKeeper.getStore {
-            PokedexStoreFactory(
+            FavoriteStoreFactory(
                 storeFactory = storeFactory,
-                searchValue = searchValue,
             ).create()
         }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val state: StateFlow<PokedexStore.State> = pokedexStore.stateFlow
+    val state: StateFlow<FavoriteStore.State> = favoriteStore.stateFlow
 
-    fun onEvent(event: PokedexStore.Intent) {
-        pokedexStore.accept(event)
+    fun onEvent(event: FavoriteStore.Intent) {
+        favoriteStore.accept(event)
     }
 
     fun onOutput(output: Output) {

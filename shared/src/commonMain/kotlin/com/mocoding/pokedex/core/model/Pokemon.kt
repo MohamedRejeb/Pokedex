@@ -9,8 +9,15 @@ data class Pokemon(
   val url: String
 ) {
 
-  val imageUrl get(): String {
-    val index = url.split("/".toRegex()).dropLast(1).last()
-    return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$index.png"
+  private val number get() =
+    url.split("/").dropLast(1).last()
+
+  val numberString get() = when(number.length) {
+    1 -> "#00$number"
+    2 -> "#0$number"
+    else -> "#$number"
   }
+
+  val imageUrl get() =
+    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$number.png"
 }

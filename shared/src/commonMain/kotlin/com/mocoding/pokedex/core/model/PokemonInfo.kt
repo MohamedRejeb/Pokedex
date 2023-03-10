@@ -16,7 +16,8 @@ data class PokemonInfo(
   val attack: Int = Random.nextInt(maxAttack),
   val defense: Int = Random.nextInt(maxDefense),
   val speed: Int = Random.nextInt(maxSpeed),
-  val exp: Int = Random.nextInt(maxExp)
+  val exp: Int = Random.nextInt(maxExp),
+  val isFavorite: Boolean = false
 ) {
   val imageUrl: String =
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png"

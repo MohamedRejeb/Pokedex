@@ -18,16 +18,14 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.mocoding.pokedex.ui.main.state.CategoryState
 import com.mocoding.pokedex.ui.theme.Black
 import com.seiko.imageloader.rememberAsyncImagePainter
 
 @Composable
 internal fun CategoryButton(
     onClick: () -> Unit,
-    title: String,
-    iconUrl: String,
-    startColor: Color,
-    endColor: Color,
+    categoryState: CategoryState,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -37,20 +35,20 @@ internal fun CategoryButton(
             .clickable { onClick() }
             .background(
                 Brush.linearGradient(
-                    listOf(startColor, endColor)
+                    listOf(categoryState.startColor, categoryState.endColor)
                 )
             )
             .padding(16.dp)
     ) {
         Text(
-            text = title,
+            text = categoryState.title,
             color = Color.White,
             style = MaterialTheme.typography.titleMedium,
         )
 
         Spacer(Modifier.weight(1f))
 
-        val painter = rememberAsyncImagePainter(iconUrl)
+        val painter = rememberAsyncImagePainter(categoryState.iconUrl)
 
         Box(
             contentAlignment = Alignment.Center
@@ -65,14 +63,14 @@ internal fun CategoryButton(
                             listOf(
                                 Black.copy(alpha = .3f),
                                 Color.Transparent
-                            )
+                            ),
                         )
                     )
             )
 
             Image(
                 painter = painter,
-                contentDescription = title,
+                contentDescription = categoryState.title,
                 modifier = Modifier
                     .offset(y = (-8).dp)
                     .size(40.dp)

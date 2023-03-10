@@ -36,6 +36,8 @@ class MainComponent(
 
     sealed class Output {
         object PokedexClicked : Output()
+        object FavoriteClicked : Output()
+        object ComingSoon : Output()
         data class PokedexSearchSubmitted(val searchValue: String) : Output()
     }
 

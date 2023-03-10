@@ -4,19 +4,14 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
-import com.arkivanov.mvikotlin.extensions.coroutines.states
-import com.mocoding.pokedex.data.repository.PokemonRepository
 import com.mocoding.pokedex.ui.details.store.DetailsStore
 import com.mocoding.pokedex.ui.details.store.DetailsStoreFactory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
 
 class DetailsComponent(
     componentContext: ComponentContext,
     storeFactory: StoreFactory,
-    pokemonRepository: PokemonRepository,
     pokemonName: String,
     private val output: (Output) -> Unit
 ): ComponentContext by componentContext {
@@ -25,7 +20,6 @@ class DetailsComponent(
         instanceKeeper.getStore {
             DetailsStoreFactory(
                 storeFactory = storeFactory,
-                pokemonRepository = pokemonRepository,
                 pokemonName = pokemonName
             ).create()
         }
@@ -42,7 +36,7 @@ class DetailsComponent(
     }
 
     sealed class Output {
-        object Back : Output()
+        object NavigateBack : Output()
     }
 
 }

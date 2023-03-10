@@ -5,7 +5,6 @@ import org.koin.core.scope.Scope
 
 expect fun Scope.sqlDriverFactory(): SqlDriver
 fun createDatabase(driver: SqlDriver): PokemonDatabase {
-    println("database created")
     val database = PokemonDatabase(
         driver = driver,
     )

@@ -35,7 +35,7 @@ internal fun PokemonLoadingItem(
                 this.alpha = abs(1f - alpha())
             }
             .clip(MaterialTheme.shapes.small)
-            .background(MaterialTheme.colorScheme.secondary)
+            .background(MaterialTheme.colorScheme.primary.copy(.6f))
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -51,7 +51,7 @@ internal fun PokemonLoadingItem(
                         this.alpha = alpha()
                     }
                     .clip(MaterialTheme.shapes.small)
-                    .background(MaterialTheme.colorScheme.onSecondary)
+                    .background(MaterialTheme.colorScheme.onBackground.copy(.4f))
             )
 
             Box(
@@ -62,7 +62,17 @@ internal fun PokemonLoadingItem(
                         this.alpha = alpha()
                     }
                     .clip(MaterialTheme.shapes.small)
-                    .background(MaterialTheme.colorScheme.onSecondary)
+                    .background(MaterialTheme.colorScheme.onBackground.copy(.4f))
+            )
+            Box(
+                modifier = modifier
+                    .fillMaxWidth(max(.3f, Random.nextFloat()))
+                    .height(20.dp)
+                    .graphicsLayer {
+                        this.alpha = alpha()
+                    }
+                    .clip(MaterialTheme.shapes.small)
+                    .background(MaterialTheme.colorScheme.onBackground.copy(.4f))
             )
         }
     }

@@ -1,4 +1,4 @@
-package com.mocoding.pokedex.ui.pokedex.store
+package com.mocoding.pokedex.ui.favorite.store
 
 import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.SimpleBootstrapper
@@ -13,17 +13,16 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-internal class PokedexStoreFactory(
+class FavoriteStoreFactory(
     private val storeFactory: StoreFactory,
-    private val searchValue: String,
 ): KoinComponent {
 
     private val pokemonRepository by inject<PokemonRepository>()
 
-    fun create(): PokedexStore =
-        object : PokedexStore, Store<PokedexStore.Intent, PokedexStore.State, Nothing> by storeFactory.create(
-            name = "PokedexStore",
-            initialState = PokedexStore.State(),
+    fun create(): FavoriteStore =
+        object : FavoriteStore, Store<FavoriteStore.Intent, FavoriteStore.State, Nothing> by storeFactory.create(
+            name = "FavoriteStore",
+            initialState = FavoriteStore.State(),
             bootstrapper = SimpleBootstrapper(Unit),
             executorFactory = ::ExecutorImpl,
             reducer = ReducerImpl
@@ -36,16 +35,16 @@ internal class PokedexStoreFactory(
         data class SearchValueUpdated(val searchValue: String) : Msg()
     }
 
-    private inner class ExecutorImpl : CoroutineExecutor<PokedexStore.Intent, Unit, PokedexStore.State, Msg, Nothing>(
+    private inner class ExecutorImpl : CoroutineExecutor<FavoriteStore.Intent, Unit, FavoriteStore.State, Msg, Nothing>(
         pokedexDispatchers.main) {
-        override fun executeAction(action: Unit, getState: () -> PokedexStore.State) {
+        override fun executeAction(action: Unit, getState: () -> FavoriteStore.State) {
             loadPokemonListByPage(page = 0)
         }
 
-        override fun executeIntent(intent: PokedexStore.Intent, getState: () -> PokedexStore.State): Unit =
+        override fun executeIntent(intent: FavoriteStore.Intent, getState: () -> FavoriteStore.State): Unit =
             when (intent) {
-                is PokedexStore.Intent.LoadPokemonListByPage -> loadPokemonListByPage(intent.page)
-                is PokedexStore.Intent.UpdateSearchValue -> dispatch(Msg.SearchValueUpdated(intent.searchValue))
+                is FavoriteStore.Intent.LoadPokemonListByPage -> loadPokemonListByPage(intent.page)
+                is FavoriteStore.Intent.UpdateSearchValue -> dispatch(Msg.SearchValueUpdated(intent.searchValue))
             }
 
         private var loadPokemonListByPageJob: Job? = null
@@ -67,11 +66,11 @@ internal class PokedexStoreFactory(
         }
     }
 
-    private object ReducerImpl: Reducer<PokedexStore.State, Msg> {
-        override fun PokedexStore.State.reduce(msg: Msg): PokedexStore.State =
+    private object ReducerImpl: Reducer<FavoriteStore.State, Msg> {
+        override fun FavoriteStore.State.reduce(msg: Msg): FavoriteStore.State =
             when (msg) {
                 is Msg.PokemonListLoading -> copy(isLoading = true)
-                is Msg.PokemonListLoaded -> PokedexStore.State(pokemonList = pokemonList + msg.pokemonList)
+                is Msg.PokemonListLoaded -> FavoriteStore.State(pokemonList = pokemonList + msg.pokemonList)
                 is Msg.PokemonListFailed -> copy(error = msg.error)
                 is Msg.SearchValueUpdated -> copy(searchValue = msg.searchValue)
             }

@@ -18,6 +18,7 @@ import com.mocoding.pokedex.core.model.Pokemon
 internal fun PokemonGrid(
     onPokemonClicked: (name: String) -> Unit,
     pokemonList: List<Pokemon>,
+    isLoading: Boolean,
     loadMoreItems: () -> Unit,
     modifier: Modifier = Modifier,
 ) {

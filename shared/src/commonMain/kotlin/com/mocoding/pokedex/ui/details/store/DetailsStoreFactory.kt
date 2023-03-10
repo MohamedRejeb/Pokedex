@@ -9,12 +9,15 @@ import com.mocoding.pokedex.core.model.PokemonInfo
 import com.mocoding.pokedex.data.repository.PokemonRepository
 import com.mocoding.pokedex.pokedexDispatchers
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 internal class DetailsStoreFactory(
     private val storeFactory: StoreFactory,
-    private val pokemonRepository: PokemonRepository,
     private val pokemonName: String
-) {
+): KoinComponent {
+    private val pokemonRepository by inject<PokemonRepository>()
+
     fun create(): DetailsStore =
         object : DetailsStore, Store<DetailsStore.Intent, DetailsStore.State, Nothing> by storeFactory.create(
             name = "DetailsStore",
@@ -48,7 +51,7 @@ internal class DetailsStoreFactory(
                 pokemonRepository
                     .getPokemonByName(name)
                     .onSuccess { pokemonInfo ->
-                        Msg.PokemonInfoLoaded(pokemonInfo)
+                        dispatch(Msg.PokemonInfoLoaded(pokemonInfo))
                     }
                     .onFailure { e ->
                         dispatch(Msg.PokemonInfoFailed(e.message))

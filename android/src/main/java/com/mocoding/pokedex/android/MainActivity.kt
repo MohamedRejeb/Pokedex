@@ -22,17 +22,16 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val koin = initKoin(
+        initKoin(
             enableNetworkLogs = BuildConfig.DEBUG
         ) {
             androidContext(applicationContext)
-        }.koin
+        }
         
         val rootComponent =
             RootComponent(
                 componentContext = defaultComponentContext(),
                 storeFactory = DefaultStoreFactory(),
-                pokemonRepository = koin.get()
             )
 
         setContent {

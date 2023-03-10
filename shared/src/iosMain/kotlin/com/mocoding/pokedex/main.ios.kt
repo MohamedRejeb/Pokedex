@@ -21,7 +21,7 @@ fun MainViewController(
     topSafeArea: Float,
     bottomSafeArea: Float
 ): UIViewController {
-    val koin = initKoin().koin
+    initKoin()
 
     val lifecycle = LifecycleRegistry()
 
@@ -29,7 +29,6 @@ fun MainViewController(
         RootComponent(
             componentContext = DefaultComponentContext(lifecycle = lifecycle),
             storeFactory = DefaultStoreFactory(),
-            pokemonRepository = koin.get()
         )
 
     return ComposeUIViewController {
