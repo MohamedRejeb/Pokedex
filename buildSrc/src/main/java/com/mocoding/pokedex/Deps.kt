@@ -1,14 +1,6 @@
 package com.mocoding.pokedex
 
 object Deps {
-    object Android {
-        object Tools {
-            object Build {
-                const val gradlePlugin = "com.android.tools.build:gradle:${Versions.gradlePlugin}"
-            }
-        }
-    }
-
     object Org {
         object JetBrains {
             object Kotlinx {

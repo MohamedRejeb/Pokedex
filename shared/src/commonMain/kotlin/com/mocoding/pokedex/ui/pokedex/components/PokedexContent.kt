@@ -39,12 +39,11 @@ internal fun PokedexContent(
                     containerColor = MaterialTheme.colorScheme.background
                 )
             )
-        }
+        },
+        modifier = Modifier.padding(LocalSafeArea.current)
     ) {  paddingValue ->
         Box(
-            modifier = Modifier
-                .padding(paddingValue)
-                .padding(LocalSafeArea.current)
+            modifier = Modifier.padding(paddingValue)
         ) {
 
 //            TextField(
@@ -117,7 +116,7 @@ internal fun PokedexContent(
                         onOutput(PokedexComponent.Output.NavigateToDetails(name = name))
                     },
                     pokemonList = state.pokemonList,
-                    isLoading = state.isLoading,
+                    isLoading = !state.isLastPageLoaded,
                     loadMoreItems = {
                         if (state.pokemonList.isEmpty()) return@PokemonGrid
 

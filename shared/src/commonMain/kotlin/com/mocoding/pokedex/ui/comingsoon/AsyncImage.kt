@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.dp
 import com.seiko.imageloader.ImageRequestState
 import com.seiko.imageloader.rememberAsyncImagePainter
 
@@ -18,7 +18,8 @@ import com.seiko.imageloader.rememberAsyncImagePainter
 internal fun AsyncImage(
     url: String,
     contentDescription: String?,
-    contentScale: ContentScale,
+    contentScale: ContentScale = ContentScale.Fit,
+    colorFilter: ColorFilter? = null,
     modifier: Modifier = Modifier
 ) {
     val painter = rememberAsyncImagePainter(url)
@@ -30,7 +31,8 @@ internal fun AsyncImage(
         Image(
             painter = painter,
             contentDescription = contentDescription,
-            contentScale = ContentScale.Fit,
+            contentScale = contentScale,
+            colorFilter = colorFilter,
             modifier = Modifier.fillMaxSize()
         )
 

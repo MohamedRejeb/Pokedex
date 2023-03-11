@@ -38,12 +38,11 @@ internal fun FavoriteContent(
                     containerColor = MaterialTheme.colorScheme.background
                 )
             )
-        }
+        },
+        modifier = Modifier.padding(LocalSafeArea.current)
     ) {  paddingValue ->
         Box(
-            modifier = Modifier
-                .padding(paddingValue)
-                .padding(LocalSafeArea.current)
+            modifier = Modifier.padding(paddingValue)
         ) {
 
             state.error?.let { error ->
@@ -78,16 +77,22 @@ internal fun FavoriteContent(
                     LinearProgressIndicator(
                         modifier = Modifier.fillMaxWidth()
                     )
+                } else if (state.pokemonList.isEmpty()) {
+                    Text(
+                        text = "Your favorite list is empty!",
+                        color = MaterialTheme.colorScheme.onBackground.copy(.8f),
+                        style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier.padding(20.dp)
+                    )
+                } else {
+                    PokemonGrid(
+                        onPokemonClicked = { name ->
+                            onOutput(FavoriteComponent.Output.NavigateToDetails(name = name))
+                        },
+                        pokemonList = state.pokemonList,
+                        isLoading = state.isLoading,
+                    )
                 }
-
-                PokemonGrid(
-                    onPokemonClicked = { name ->
-                        onOutput(FavoriteComponent.Output.NavigateToDetails(name = name))
-                    },
-                    pokemonList = state.pokemonList,
-                    isLoading = state.isLoading,
-                    loadMoreItems = {}
-                )
             }
 
 

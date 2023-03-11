@@ -12,6 +12,7 @@ interface PokedexStore: Store<PokedexStore.Intent, PokedexStore.State, Nothing> 
 
     data class State(
         val isLoading: Boolean = false,
+        val isLastPageLoaded: Boolean = false,
         val error: String? = null,
         val pokemonList: List<Pokemon> = emptyList(),
         val searchValue: String = "",

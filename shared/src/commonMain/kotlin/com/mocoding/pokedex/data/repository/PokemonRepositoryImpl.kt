@@ -5,7 +5,6 @@ import com.mocoding.pokedex.core.database.dao.PokemonInfoDao
 import com.mocoding.pokedex.core.model.Pokemon
 import com.mocoding.pokedex.core.model.PokemonInfo
 import com.mocoding.pokedex.core.network.client.PokemonClient
-import com.mocoding.pokedex.core.network.errors.PokedexException
 import com.mocoding.pokedex.data.toPokemon
 import com.mocoding.pokedex.data.toPokemonEntity
 import com.mocoding.pokedex.data.toPokemonInfo
@@ -53,6 +52,17 @@ class PokemonRepositoryImpl: PokemonRepository, KoinComponent {
         } catch (e: Exception) {
             Result.failure(e)
         }
+    }
+
+    override suspend fun getFavoritePokemonList(): List<Pokemon> {
+        return pokemonInfoDao.selectAllFavorite().map { it.toPokemon() }
+    }
+
+    override suspend fun updatePokemonFavoriteState(name: String, isFavorite: Boolean) {
+        pokemonInfoDao.updateIsFavorite(
+            name = name,
+            isFavorite = isFavorite,
+        )
     }
 
 }

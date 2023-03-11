@@ -8,5 +8,7 @@ interface PokemonRepository {
     suspend fun getPokemonList(page: Long): Result<List<Pokemon>>
 
     suspend fun getPokemonByName(name: String): Result<PokemonInfo>
+    suspend fun getFavoritePokemonList(): List<Pokemon>
+    suspend fun updatePokemonFavoriteState(name: String, isFavorite: Boolean)
 
 }

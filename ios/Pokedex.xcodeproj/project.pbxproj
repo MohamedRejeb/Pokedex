@@ -14,6 +14,7 @@
 		EA2CADB229BC9EC20007AE62 /* PokedexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2CADB129BC9EC20007AE62 /* PokedexTests.swift */; };
 		EA2CADBC29BC9EC20007AE62 /* PokedexUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2CADBB29BC9EC20007AE62 /* PokedexUITests.swift */; };
 		EA2CADBE29BC9EC20007AE62 /* PokedexUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2CADBD29BC9EC20007AE62 /* PokedexUITestsLaunchTests.swift */; };
+		EA2CADCC29BCA7DB0007AE62 /* ComposeViewControllerToSwiftUi.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2CADCB29BCA7DB0007AE62 /* ComposeViewControllerToSwiftUi.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,8 @@
 		EA2CADB729BC9EC20007AE62 /* PokedexUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokedexUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA2CADBB29BC9EC20007AE62 /* PokedexUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexUITests.swift; sourceTree = "<group>"; };
 		EA2CADBD29BC9EC20007AE62 /* PokedexUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		EA2CADCA29BCA63F0007AE62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		EA2CADCB29BCA7DB0007AE62 /* ComposeViewControllerToSwiftUi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewControllerToSwiftUi.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,9 +119,11 @@
 		EA2CAD9F29BC9EC10007AE62 /* Pokedex */ = {
 			isa = PBXGroup;
 			children = (
+				EA2CADCA29BCA63F0007AE62 /* Info.plist */,
 				EA2CADA029BC9EC10007AE62 /* PokedexApp.swift */,
 				EA2CADA429BC9EC20007AE62 /* Assets.xcassets */,
 				EA2CADA629BC9EC20007AE62 /* Preview Content */,
+				EA2CADCB29BCA7DB0007AE62 /* ComposeViewControllerToSwiftUi.swift */,
 			);
 			path = Pokedex;
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA2CADCC29BCA7DB0007AE62 /* ComposeViewControllerToSwiftUi.swift in Sources */,
 				EA2CADA129BC9EC10007AE62 /* PokedexApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,7 +473,7 @@
 				DEVELOPMENT_TEAM = V7T9SX3F3Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = Pokedex/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -505,7 +511,7 @@
 				DEVELOPMENT_TEAM = V7T9SX3F3Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = Pokedex/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

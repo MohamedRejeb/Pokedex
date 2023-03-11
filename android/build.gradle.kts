@@ -1,5 +1,6 @@
 import com.mocoding.pokedex.Configuration
 import com.mocoding.pokedex.Deps
+import com.mocoding.pokedex.Versions
 
 plugins {
     id("com.android.application")
@@ -20,7 +21,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.0"
+        kotlinCompilerExtensionVersion = Versions.composeCompoiler
     }
     packagingOptions {
         resources {
@@ -43,11 +44,6 @@ android {
 
 dependencies {
     implementation(project(":shared"))
-    implementation("androidx.compose.ui:ui:1.3.1")
-    implementation("androidx.compose.ui:ui-tooling:1.3.1")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.3.1")
-    implementation("androidx.compose.foundation:foundation:1.3.1")
-    implementation("androidx.compose.material:material:1.3.1")
     implementation("androidx.activity:activity-compose:1.6.1")
 
     // Koin

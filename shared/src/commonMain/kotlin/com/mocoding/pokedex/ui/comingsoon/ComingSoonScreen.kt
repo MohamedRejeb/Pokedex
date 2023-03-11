@@ -35,13 +35,13 @@ internal fun ComingSoonScreen(component: ComingSoonComponent) {
                     containerColor = MaterialTheme.colorScheme.background
                 )
             )
-        }
+        },
+        modifier = Modifier.padding(LocalSafeArea.current)
     ) {  paddingValue ->
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .padding(paddingValue)
-                .padding(LocalSafeArea.current)
                 .fillMaxSize()
         ) {
 

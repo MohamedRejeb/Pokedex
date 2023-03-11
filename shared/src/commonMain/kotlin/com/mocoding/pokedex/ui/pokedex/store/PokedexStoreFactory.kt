@@ -34,6 +34,7 @@ internal class PokedexStoreFactory(
         data class PokemonListLoaded(val pokemonList: List<Pokemon>) : Msg()
         data class PokemonListFailed(val error: String?) : Msg()
         data class SearchValueUpdated(val searchValue: String) : Msg()
+        object LastPageLoaded : Msg()
     }
 
     private inner class ExecutorImpl : CoroutineExecutor<PokedexStore.Intent, Unit, PokedexStore.State, Msg, Nothing>(
@@ -44,13 +45,17 @@ internal class PokedexStoreFactory(
 
         override fun executeIntent(intent: PokedexStore.Intent, getState: () -> PokedexStore.State): Unit =
             when (intent) {
-                is PokedexStore.Intent.LoadPokemonListByPage -> loadPokemonListByPage(intent.page)
+                is PokedexStore.Intent.LoadPokemonListByPage -> loadPokemonListByPage(intent.page, getState().isLastPageLoaded)
                 is PokedexStore.Intent.UpdateSearchValue -> dispatch(Msg.SearchValueUpdated(intent.searchValue))
             }
 
         private var loadPokemonListByPageJob: Job? = null
-        private fun loadPokemonListByPage(page: Long) {
+        private fun loadPokemonListByPage(
+            page: Long,
+            isLastPageLoaded: Boolean = false
+        ) {
             if (loadPokemonListByPageJob?.isActive == true) return
+            if (isLastPageLoaded) return
 
             loadPokemonListByPageJob = scope.launch {
                 dispatch(Msg.PokemonListLoading)
@@ -58,7 +63,11 @@ internal class PokedexStoreFactory(
                 pokemonRepository
                     .getPokemonList(page)
                     .onSuccess { pokemonList ->
-                        dispatch(Msg.PokemonListLoaded(pokemonList))
+                        if (pokemonList.isEmpty()) {
+                            dispatch(Msg.LastPageLoaded)
+                        } else {
+                            dispatch(Msg.PokemonListLoaded(pokemonList))
+                        }
                     }
                     .onFailure { e ->
                         dispatch(Msg.PokemonListFailed(e.message))
@@ -74,6 +83,7 @@ internal class PokedexStoreFactory(
                 is Msg.PokemonListLoaded -> PokedexStore.State(pokemonList = pokemonList + msg.pokemonList)
                 is Msg.PokemonListFailed -> copy(error = msg.error)
                 is Msg.SearchValueUpdated -> copy(searchValue = msg.searchValue)
+                Msg.LastPageLoaded -> copy(isLastPageLoaded = true)
             }
     }
 }

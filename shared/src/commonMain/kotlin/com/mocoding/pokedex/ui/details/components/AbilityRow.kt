@@ -15,7 +15,7 @@ internal fun AbilityRow(
     modifier: Modifier = Modifier,
 ) {
     LazyRow(
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
         modifier = modifier,
     ) {
         items(types, key = { it.slot }) { typeResponse ->

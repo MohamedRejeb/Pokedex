@@ -7,6 +7,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.ComposeUIViewController
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
@@ -38,10 +39,11 @@ fun MainViewController(
 
         val topSafeAreaDp = with(density) { topSafeArea.toDp() }
         val bottomSafeAreaDp = with(density) { bottomSafeArea.toDp() }
-        val safeArea = PaddingValues(top = topSafeAreaDp, bottom = bottomSafeAreaDp)
+        val safeArea = PaddingValues(top = topSafeAreaDp + 10.dp, bottom = bottomSafeAreaDp)
 
         // Bind safe area as the value for LocalSafeArea
         CompositionLocalProvider(LocalSafeArea provides safeArea) {
+            println(safeArea)
             PokedexTheme {
                 Surface(
                     color = MaterialTheme.colorScheme.background,

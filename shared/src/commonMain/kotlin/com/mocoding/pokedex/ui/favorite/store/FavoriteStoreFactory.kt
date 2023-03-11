@@ -32,36 +32,25 @@ class FavoriteStoreFactory(
         object PokemonListLoading : Msg()
         data class PokemonListLoaded(val pokemonList: List<Pokemon>) : Msg()
         data class PokemonListFailed(val error: String?) : Msg()
-        data class SearchValueUpdated(val searchValue: String) : Msg()
     }
 
     private inner class ExecutorImpl : CoroutineExecutor<FavoriteStore.Intent, Unit, FavoriteStore.State, Msg, Nothing>(
         pokedexDispatchers.main) {
         override fun executeAction(action: Unit, getState: () -> FavoriteStore.State) {
-            loadPokemonListByPage(page = 0)
+            getFavoritePokemonList()
         }
 
-        override fun executeIntent(intent: FavoriteStore.Intent, getState: () -> FavoriteStore.State): Unit =
-            when (intent) {
-                is FavoriteStore.Intent.LoadPokemonListByPage -> loadPokemonListByPage(intent.page)
-                is FavoriteStore.Intent.UpdateSearchValue -> dispatch(Msg.SearchValueUpdated(intent.searchValue))
-            }
+        override fun executeIntent(intent: FavoriteStore.Intent, getState: () -> FavoriteStore.State): Unit = Unit
 
-        private var loadPokemonListByPageJob: Job? = null
-        private fun loadPokemonListByPage(page: Long) {
-            if (loadPokemonListByPageJob?.isActive == true) return
+        private var getFavoritePokemonListJob: Job? = null
+        private fun getFavoritePokemonList() {
+            if (getFavoritePokemonListJob?.isActive == true) return
 
-            loadPokemonListByPageJob = scope.launch {
+            getFavoritePokemonListJob = scope.launch {
                 dispatch(Msg.PokemonListLoading)
 
-                pokemonRepository
-                    .getPokemonList(page)
-                    .onSuccess { pokemonList ->
-                        dispatch(Msg.PokemonListLoaded(pokemonList))
-                    }
-                    .onFailure { e ->
-                        dispatch(Msg.PokemonListFailed(e.message))
-                    }
+                val favoritePokemonList = pokemonRepository.getFavoritePokemonList()
+                dispatch(Msg.PokemonListLoaded(favoritePokemonList))
             }
         }
     }
@@ -72,7 +61,6 @@ class FavoriteStoreFactory(
                 is Msg.PokemonListLoading -> copy(isLoading = true)
                 is Msg.PokemonListLoaded -> FavoriteStore.State(pokemonList = pokemonList + msg.pokemonList)
                 is Msg.PokemonListFailed -> copy(error = msg.error)
-                is Msg.SearchValueUpdated -> copy(searchValue = msg.searchValue)
             }
     }
 }

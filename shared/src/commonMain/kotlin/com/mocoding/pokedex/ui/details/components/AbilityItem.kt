@@ -1,6 +1,7 @@
 package com.mocoding.pokedex.ui.details.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
@@ -18,12 +19,12 @@ internal fun AbilityItem(
 ) {
 
     Text(
-        text = name,
-        color = Color.White,
-        style = MaterialTheme.typography.labelLarge,
+        text = name.replaceFirstChar { it.uppercaseChar() },
+        color = containerColor,
+        style = MaterialTheme.typography.bodyLarge,
         modifier = modifier
-            .padding(horizontal = 8.dp, vertical = 4.dp)
-            .background(containerColor, CircleShape)
+            .border(1.dp, containerColor, CircleShape)
+            .padding(horizontal = 10.dp, vertical = 4.dp)
     )
 
 }

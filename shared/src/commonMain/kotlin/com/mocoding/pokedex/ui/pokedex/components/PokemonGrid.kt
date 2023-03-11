@@ -19,7 +19,7 @@ internal fun PokemonGrid(
     onPokemonClicked: (name: String) -> Unit,
     pokemonList: List<Pokemon>,
     isLoading: Boolean,
-    loadMoreItems: () -> Unit,
+    loadMoreItems: () -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
     val infiniteTransition = rememberInfiniteTransition()
@@ -47,12 +47,14 @@ internal fun PokemonGrid(
             )
         }
 
-        items(5) { index ->
-            LaunchedEffect(Unit) {
-                if (index == 0) loadMoreItems()
-            }
+        if (isLoading) {
+            items(5) { index ->
+                LaunchedEffect(Unit) {
+                    if (index == 0) loadMoreItems()
+                }
 
-            PokemonLoadingItem(alpha = alpha)
+                PokemonLoadingItem(alpha = alpha)
+            }
         }
 
     }

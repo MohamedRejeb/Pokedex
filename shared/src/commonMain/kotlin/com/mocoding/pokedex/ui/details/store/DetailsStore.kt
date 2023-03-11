@@ -6,7 +6,7 @@ import com.mocoding.pokedex.core.model.PokemonInfo
 interface DetailsStore: Store<DetailsStore.Intent, DetailsStore.State, Nothing> {
 
     sealed class Intent {
-        data class LoadPokemonInfoByName(val name: String): Intent()
+        data class UpdatePokemonFavoriteState(val isFavorite: Boolean): Intent()
     }
 
     data class State(

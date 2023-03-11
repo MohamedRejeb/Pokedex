@@ -27,6 +27,7 @@ fun PokemonInfo.toPokemonInfoEntity() = PokemonInfoEntity(
     weight = weight,
     experience = experience,
     types = Json.encodeToString(types),
+    stats = Json.encodeToString(stats),
     isFavorite = if (isFavorite) 1 else 0
 )
 
@@ -37,5 +38,11 @@ fun PokemonInfoEntity.toPokemonInfo() = PokemonInfo(
     weight = weight,
     experience = experience,
     types = Json.decodeFromString(types),
+    stats = Json.decodeFromString(stats),
     isFavorite = isFavorite != 0L
+)
+
+fun PokemonInfoEntity.toPokemon() = Pokemon(
+    name = name,
+    url = "$id/"
 )
