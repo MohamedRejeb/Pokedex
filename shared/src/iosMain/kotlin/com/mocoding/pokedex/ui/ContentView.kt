@@ -11,11 +11,6 @@ import com.mocoding.pokedex.ui.root.RootContent
 @Composable
 internal fun ContentView(
     component: RootComponent,
-    safeArea: PaddingValues,
 ) {
-    Box(
-        modifier = Modifier.padding(safeArea)
-    ) {
-        RootContent(component)
-    }
+    RootContent(component)
 }

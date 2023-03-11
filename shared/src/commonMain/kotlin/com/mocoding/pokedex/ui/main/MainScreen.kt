@@ -14,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.mocoding.pokedex.ui.helper.LocalSafeArea
 import com.mocoding.pokedex.ui.main.components.MainContent
 import kotlinx.coroutines.launch
 
@@ -95,7 +96,9 @@ internal fun MainScreen(component: MainComponent) {
                     state = state,
                     onEvent = component::onEvent,
                     onOutput = component::onOutput,
-                    modifier = Modifier.padding(paddingValues)
+                    modifier = Modifier
+                        .padding(paddingValues)
+                        .padding(LocalSafeArea.current)
                 )
             }
         }

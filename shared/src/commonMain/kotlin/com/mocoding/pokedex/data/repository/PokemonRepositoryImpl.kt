@@ -50,7 +50,7 @@ class PokemonRepositoryImpl: PokemonRepository, KoinComponent {
             } else {
                 Result.success(cachedPokemon.toPokemonInfo())
             }
-        } catch (e: PokedexException) {
+        } catch (e: Exception) {
             Result.failure(e)
         }
     }

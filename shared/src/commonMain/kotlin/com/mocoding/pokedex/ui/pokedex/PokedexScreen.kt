@@ -3,7 +3,7 @@ package com.mocoding.pokedex.ui.pokedex
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.mocoding.pokedex.ui.pokedex.component.PokedexContent
+import com.mocoding.pokedex.ui.pokedex.components.PokedexContent
 
 @Composable
 internal fun PokedexScreen(component: PokedexComponent) {

@@ -2,7 +2,7 @@ package com.mocoding.pokedex.ui.favorite.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.ArrowBackIosNew
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -11,7 +11,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mocoding.pokedex.ui.favorite.FavoriteComponent
 import com.mocoding.pokedex.ui.favorite.store.FavoriteStore
-import com.mocoding.pokedex.ui.pokedex.component.PokemonGrid
+import com.mocoding.pokedex.ui.helper.LocalSafeArea
+import com.mocoding.pokedex.ui.pokedex.components.PokemonGrid
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,7 +31,7 @@ internal fun FavoriteContent(
                             onOutput(FavoriteComponent.Output.NavigateBack)
                         },
                     ) {
-                        Icon(Icons.Rounded.ArrowBack, contentDescription = null)
+                        Icon(Icons.Rounded.ArrowBackIosNew, contentDescription = null)
                     }
                 },
                 colors = TopAppBarDefaults.largeTopAppBarColors(
@@ -42,6 +43,7 @@ internal fun FavoriteContent(
         Box(
             modifier = Modifier
                 .padding(paddingValue)
+                .padding(LocalSafeArea.current)
         ) {
 
             state.error?.let { error ->

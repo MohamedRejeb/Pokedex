@@ -4,13 +4,15 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Timelapse
-import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.ArrowBackIosNew
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.mocoding.pokedex.ui.helper.LocalSafeArea
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -26,7 +28,7 @@ internal fun ComingSoonScreen(component: ComingSoonComponent) {
                             component.onOutput(ComingSoonComponent.Output.NavigateBack)
                         },
                     ) {
-                        Icon(Icons.Rounded.ArrowBack, contentDescription = null)
+                        Icon(Icons.Rounded.ArrowBackIosNew, contentDescription = null)
                     }
                 },
                 colors = TopAppBarDefaults.largeTopAppBarColors(
@@ -39,6 +41,7 @@ internal fun ComingSoonScreen(component: ComingSoonComponent) {
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .padding(paddingValue)
+                .padding(LocalSafeArea.current)
                 .fillMaxSize()
         ) {
 
@@ -65,7 +68,8 @@ internal fun ComingSoonScreen(component: ComingSoonComponent) {
                 Image(
                     Icons.Outlined.Timelapse,
                     contentDescription = "Coming Soon",
-                    modifier = Modifier.size(100.dp)
+                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground),
+                    modifier = Modifier.size(100.dp),
                 )
             }
 

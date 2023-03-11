@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.window.ComposeUIViewController
@@ -12,6 +13,7 @@ import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import com.mocoding.pokedex.core.di.initKoin
 import com.mocoding.pokedex.ui.ContentView
+import com.mocoding.pokedex.ui.helper.LocalSafeArea
 import com.mocoding.pokedex.ui.root.RootComponent
 import com.mocoding.pokedex.ui.theme.PokedexTheme
 import platform.UIKit.*
@@ -36,16 +38,19 @@ fun MainViewController(
 
         val topSafeAreaDp = with(density) { topSafeArea.toDp() }
         val bottomSafeAreaDp = with(density) { bottomSafeArea.toDp() }
+        val safeArea = PaddingValues(top = topSafeAreaDp, bottom = bottomSafeAreaDp)
 
-        PokedexTheme {
-            Surface(
-                color = MaterialTheme.colorScheme.background,
-                modifier = Modifier.fillMaxSize()
-            ) {
-                ContentView(
-                    component = rootComponent,
-                    safeArea = PaddingValues(top = topSafeAreaDp, bottom = bottomSafeAreaDp),
-                )
+        // Bind safe area as the value for LocalSafeArea
+        CompositionLocalProvider(LocalSafeArea provides safeArea) {
+            PokedexTheme {
+                Surface(
+                    color = MaterialTheme.colorScheme.background,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    ContentView(
+                        component = rootComponent,
+                    )
+                }
             }
         }
     }
