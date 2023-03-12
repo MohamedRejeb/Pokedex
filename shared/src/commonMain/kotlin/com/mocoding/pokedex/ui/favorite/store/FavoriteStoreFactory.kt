@@ -9,6 +9,7 @@ import com.mocoding.pokedex.core.model.Pokemon
 import com.mocoding.pokedex.data.repository.PokemonRepository
 import com.mocoding.pokedex.pokedexDispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -49,8 +50,9 @@ class FavoriteStoreFactory(
             getFavoritePokemonListJob = scope.launch {
                 dispatch(Msg.PokemonListLoading)
 
-                val favoritePokemonList = pokemonRepository.getFavoritePokemonList()
-                dispatch(Msg.PokemonListLoaded(favoritePokemonList))
+                pokemonRepository.getFavoritePokemonListFlow().collectLatest { favoritePokemonList ->
+                    dispatch(Msg.PokemonListLoaded(favoritePokemonList))
+                }
             }
         }
     }
@@ -59,7 +61,7 @@ class FavoriteStoreFactory(
         override fun FavoriteStore.State.reduce(msg: Msg): FavoriteStore.State =
             when (msg) {
                 is Msg.PokemonListLoading -> copy(isLoading = true)
-                is Msg.PokemonListLoaded -> FavoriteStore.State(pokemonList = pokemonList + msg.pokemonList)
+                is Msg.PokemonListLoaded -> FavoriteStore.State(pokemonList = msg.pokemonList)
                 is Msg.PokemonListFailed -> copy(error = msg.error)
             }
     }

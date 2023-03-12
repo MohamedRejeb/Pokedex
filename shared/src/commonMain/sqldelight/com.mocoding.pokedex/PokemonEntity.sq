@@ -1,4 +1,4 @@
-CREATE TABLE pokemonEntity (
+CREATE TABLE IF NOT EXISTS pokemonEntity (
   page INTEGER NOT NULL,
   name TEXT NOT NULL PRIMARY KEY,
   url TEXT NOT NULL

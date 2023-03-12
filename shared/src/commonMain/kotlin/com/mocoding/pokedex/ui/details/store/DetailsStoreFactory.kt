@@ -54,7 +54,7 @@ internal class DetailsStoreFactory(
                 dispatch(Msg.PokemonInfoLoading)
 
                 pokemonRepository
-                    .getPokemonByName(name)
+                    .getPokemonFlowByName(name)
                     .onSuccess { pokemonInfo ->
                         dispatch(Msg.PokemonInfoLoaded(pokemonInfo))
                     }

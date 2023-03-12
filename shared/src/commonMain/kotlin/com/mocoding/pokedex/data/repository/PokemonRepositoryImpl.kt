@@ -9,6 +9,8 @@ import com.mocoding.pokedex.data.toPokemon
 import com.mocoding.pokedex.data.toPokemonEntity
 import com.mocoding.pokedex.data.toPokemonInfo
 import com.mocoding.pokedex.data.toPokemonInfoEntity
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -33,11 +35,12 @@ class PokemonRepositoryImpl: PokemonRepository, KoinComponent {
                 Result.success(cachedPokemonList.map { it.toPokemon() })
             }
         } catch (e: Exception) {
+            e.printStackTrace()
             Result.failure(e)
         }
     }
 
-    override suspend fun getPokemonByName(name: String): Result<PokemonInfo> {
+    override suspend fun getPokemonFlowByName(name: String): Result<PokemonInfo> {
         return try {
             val cachedPokemon = pokemonInfoDao.selectOneByName(name = name)
 
@@ -54,8 +57,10 @@ class PokemonRepositoryImpl: PokemonRepository, KoinComponent {
         }
     }
 
-    override suspend fun getFavoritePokemonList(): List<Pokemon> {
-        return pokemonInfoDao.selectAllFavorite().map { it.toPokemon() }
+    override suspend fun getFavoritePokemonListFlow(): Flow<List<Pokemon>> {
+        return pokemonInfoDao.selectAllFavorite().map { list ->
+            list.map { it.toPokemon() }
+        }
     }
 
     override suspend fun updatePokemonFavoriteState(name: String, isFavorite: Boolean) {

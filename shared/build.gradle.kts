@@ -14,6 +14,7 @@ plugins {
 
 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
 kotlin {
+    jvm("desktop")
     android()
     ios()
     iosSimulatorArm64()
@@ -107,14 +108,24 @@ kotlin {
         }
         val androidUnitTest by getting
 
+        val desktopMain by getting {
+            dependsOn(commonMain)
+            
+            dependencies {
+                // Ktor
+                implementation(Deps.Io.Ktor.ktorClientJava)
+
+                // SqlDelight
+                implementation(Deps.CashApp.SQLDelight.sqliteDriver)
+            }
+        }
+
         val iosMain by getting {
             dependsOn(commonMain)
 
             dependencies {
                 // Ktor
-                with(Deps.Io.Ktor) {
-                    api(ktorClientDarwin)
-                }
+                implementation(Deps.Io.Ktor.ktorClientDarwin)
 
                 // SqlDelight
                 implementation(Deps.CashApp.SQLDelight.nativeDriver)

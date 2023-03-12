@@ -1,8 +1,10 @@
 package com.mocoding.pokedex.core.database.dao
 
+import app.cash.sqldelight.coroutines.asFlow
 import com.mocoding.pokedex.core.database.PokemonDatabase
 import com.mocoding.pokedex.pokedexDispatchers
 import commocodingpokedex.PokemonInfoEntity
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class PokemonInfoDao(
@@ -15,7 +17,7 @@ class PokemonInfoDao(
     }
 
     suspend fun selectAllFavorite() = withContext(pokedexDispatchers.io) {
-        query.selectAllFavorite().executeAsList()
+        query.selectAllFavorite().asFlow().map { it.executeAsList() }
     }
 
     suspend fun insert(pokemonInfoEntity: PokemonInfoEntity) = withContext(pokedexDispatchers.io) {

@@ -32,8 +32,9 @@ internal fun VideoItem(
     val painter = rememberAsyncImagePainter(video.imageUrl)
 
     Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = modifier
+            .width(220.dp)
             .clip(MaterialTheme.shapes.medium)
             .clickable { onClick() }
             .padding(10.dp)
@@ -47,8 +48,8 @@ internal fun VideoItem(
                 contentScale = ContentScale.Crop,
                 colorFilter = ColorFilter.tint(Black.copy(.5f), BlendMode.Darken),
                 modifier = Modifier
-                    .width(300.dp)
-                    .height(200.dp)
+                    .fillMaxWidth()
+                    .aspectRatio(1.5f)
                     .clip(MaterialTheme.shapes.medium)
             )
 

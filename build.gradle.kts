@@ -1,6 +1,6 @@
 plugins {
     //trick: for the same plugin versions in all sub-modules
-    kotlin("jvm") version "1.8.10" apply false
+//    kotlin("jvm") version "1.8.10" apply false
     kotlin("android") version "1.8.10" apply false
     kotlin("multiplatform") version "1.8.10" apply false
     kotlin("plugin.serialization") version "1.8.10" apply false

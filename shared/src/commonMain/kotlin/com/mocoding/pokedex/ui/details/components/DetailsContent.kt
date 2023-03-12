@@ -33,7 +33,7 @@ internal fun DetailsContent(
     onEvent: (DetailsStore.Intent) -> Unit,
     onOutput: (DetailsComponent.Output) -> Unit,
 ) {
-    Box {
+    Box(contentAlignment = Alignment.TopCenter) {
         state.pokemonInfo?.let { pokemonInfo ->
             AsyncImage(
                 url = pokemonInfo.imageUrl,
@@ -41,6 +41,7 @@ internal fun DetailsContent(
                 contentScale = ContentScale.FillWidth,
                 colorFilter = ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(3f) }),
                 modifier = Modifier
+                    .widthIn(max = 800.dp)
                     .fillMaxWidth(.9f)
                     .wrapContentHeight(Alignment.Top, true)
                     .scale(1f, 1.8f)
@@ -134,6 +135,7 @@ internal fun DetailsContent(
                                 contentDescription = pokemonInfo.name,
                                 contentScale = ContentScale.Fit,
                                 modifier = Modifier
+                                    .widthIn(max = 500.dp)
                                     .fillMaxWidth()
                                     .aspectRatio(1.2f)
                                     .fillMaxHeight()

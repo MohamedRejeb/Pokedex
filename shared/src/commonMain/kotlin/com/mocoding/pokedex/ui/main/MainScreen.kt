@@ -1,9 +1,6 @@
 package com.mocoding.pokedex.ui.main
 
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
@@ -14,20 +11,20 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mocoding.pokedex.ui.helper.LocalSafeArea
 import com.mocoding.pokedex.ui.main.components.MainContent
+import com.mocoding.pokedex.ui.main.components.MainModalDrawerSheet
+import com.mocoding.pokedex.ui.main.store.MainStore
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun MainScreen(component: MainComponent) {
 
     val state by component.state.collectAsState()
-
-    val drawerState = rememberDrawerState(DrawerValue.Closed)
-    val scope = rememberCoroutineScope()
 
     val items = listOf("Home" to Icons.Outlined.Home, "Favorite" to Icons.Outlined.Favorite)
     var selectedItem by remember { mutableStateOf(items[0]) }
@@ -38,47 +35,53 @@ internal fun MainScreen(component: MainComponent) {
         }
     }
 
+    BoxWithConstraints {
+        if (maxWidth > 1199.dp) {
+            MainContentLarge(
+                state = state,
+                onEvent = component::onEvent,
+                onOutput = component::onOutput,
+                items = items,
+                selectedItem = selectedItem,
+                updateSelectedItem = { selectedItem = it }
+            )
+        } else {
+            MainContentDefault(
+                state = state,
+                onEvent = component::onEvent,
+                onOutput = component::onOutput,
+                items = items,
+                selectedItem = selectedItem,
+                updateSelectedItem = { selectedItem = it }
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+internal fun MainContentDefault(
+    state: MainStore.State,
+    onEvent: (MainStore.Intent) -> Unit,
+    onOutput: (MainComponent.Output) -> Unit,
+    items: List<Pair<String, ImageVector>>,
+    selectedItem: Pair<String, ImageVector>,
+    updateSelectedItem: (Pair<String, ImageVector>) -> Unit
+) {
+    val scope = rememberCoroutineScope()
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
+
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            ModalDrawerSheet(
-                drawerContainerColor = MaterialTheme.colorScheme.background,
-                drawerContentColor = MaterialTheme.colorScheme.onBackground,
-                windowInsets = WindowInsets(
-                    top = LocalSafeArea.current.calculateTopPadding() + 20.dp,
-                    bottom = LocalSafeArea.current.calculateBottomPadding()
-                ),
-            ) {
-                Spacer(Modifier.height(12.dp))
-                Text(
-                    text = "Pokedex",
-                    style = MaterialTheme.typography.titleLarge.copy(
-                        fontWeight = FontWeight.Bold
-                    ),
-                    modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
-                )
-                Spacer(Modifier.height(12.dp))
-                items.forEach { item ->
-                    NavigationDrawerItem(
-                        icon = { Icon(item.second, contentDescription = null) },
-                        label = { Text(item.first) },
-                        selected = item == selectedItem,
-                        onClick = {
-                            scope.launch { drawerState.close() }
-                            selectedItem = item
-                        },
-                        colors = NavigationDrawerItemDefaults.colors(
-                            selectedContainerColor = MaterialTheme.colorScheme.primary.copy(.6f),
-                            unselectedContainerColor = Color.Transparent,
-                            selectedTextColor = MaterialTheme.colorScheme.onPrimary,
-                            unselectedTextColor = MaterialTheme.colorScheme.onBackground,
-                            selectedIconColor = MaterialTheme.colorScheme.onPrimary,
-                            unselectedIconColor = MaterialTheme.colorScheme.onBackground,
-                        ),
-                        modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
-                    )
+            MainModalDrawerSheet(
+                items = items,
+                selectedItem = selectedItem,
+                onItemsClick = { item ->
+                    scope.launch { drawerState.close() }
+                    updateSelectedItem(item)
                 }
-            }
+            )
         },
         content = {
             Scaffold(
@@ -103,12 +106,53 @@ internal fun MainScreen(component: MainComponent) {
             ) { paddingValues ->
                 MainContent(
                     state = state,
-                    onEvent = component::onEvent,
-                    onOutput = component::onOutput,
+                    onEvent = onEvent,
+                    onOutput = onOutput,
                     modifier = Modifier.padding(paddingValues)
                 )
             }
         }
     )
+}
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+internal fun MainContentLarge(
+    state: MainStore.State,
+    onEvent: (MainStore.Intent) -> Unit,
+    onOutput: (MainComponent.Output) -> Unit,
+    items: List<Pair<String, ImageVector>>,
+    selectedItem: Pair<String, ImageVector>,
+    updateSelectedItem: (Pair<String, ImageVector>) -> Unit
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        MainModalDrawerSheet(
+            items = items,
+            selectedItem = selectedItem,
+            onItemsClick = { item ->
+                updateSelectedItem(item)
+            }
+        )
+
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = {},
+                    colors = TopAppBarDefaults.largeTopAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.background
+                    )
+                )
+            },
+            modifier = Modifier.padding(LocalSafeArea.current)
+        ) { paddingValues ->
+            MainContent(
+                state = state,
+                onEvent = onEvent,
+                onOutput = onOutput,
+                modifier = Modifier.padding(paddingValues)
+            )
+        }
+    }
 }
