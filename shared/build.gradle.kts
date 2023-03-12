@@ -90,7 +90,7 @@ kotlin {
 
                 // Image Loading
                 api(Deps.Github.imageLoader)
-                api(Deps.ArkIvanov.Essenty.lifecycle)
+                implementation(Deps.ArkIvanov.Essenty.lifecycle)
             }
         }
         val commonTest by getting {
