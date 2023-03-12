@@ -12,28 +12,28 @@ data class CategoryState(
     companion object {
         val pokedex = CategoryState(
             title = "Pokedex",
-            iconUrl = "https://cdn-icons-png.flaticon.com/512/361/361998.png",
+            iconUrl = "https://raw.githubusercontent.com/M0Coding/Pokedex/main/icons/pokeball.png",
             startColor = Red300,
             endColor = Red500,
         )
 
         val moves = CategoryState(
             title = "Moves",
-            iconUrl = "https://cdn-icons-png.flaticon.com/512/616/616494.png",
+            iconUrl = "https://raw.githubusercontent.com/M0Coding/Pokedex/main/icons/electric.png",
             startColor = Yellow300,
             endColor = Yellow500,
         )
 
         val evolutions = CategoryState(
             title = "Evolutions",
-            iconUrl = "https://cdn-icons-png.flaticon.com/512/9077/9077327.png",
+            iconUrl = "https://raw.githubusercontent.com/M0Coding/Pokedex/main/icons/dna.png",
             startColor = Green300,
             endColor = Green500,
         )
 
         val locations = CategoryState(
             title = "Locations",
-            iconUrl = "https://cdn-icons-png.flaticon.com/512/149/149060.png",
+            iconUrl = "https://raw.githubusercontent.com/M0Coding/Pokedex/main/icons/location.png",
             startColor = Blue300,
             endColor = Blue500,
         )

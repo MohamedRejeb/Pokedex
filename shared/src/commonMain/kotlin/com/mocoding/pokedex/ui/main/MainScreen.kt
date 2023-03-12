@@ -101,7 +101,6 @@ internal fun MainScreen(component: MainComponent) {
                 },
                 modifier = Modifier.padding(LocalSafeArea.current)
             ) { paddingValues ->
-                println("LocalSafeArea" + LocalSafeArea.current)
                 MainContent(
                     state = state,
                     onEvent = component::onEvent,

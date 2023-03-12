@@ -43,7 +43,6 @@ fun MainViewController(
 
         // Bind safe area as the value for LocalSafeArea
         CompositionLocalProvider(LocalSafeArea provides safeArea) {
-            println(safeArea)
             PokedexTheme {
                 Surface(
                     color = MaterialTheme.colorScheme.background,

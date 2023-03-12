@@ -6,6 +6,5 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.scope.Scope
 
 actual fun Scope.sqlDriverFactory(): SqlDriver {
-    println("driver created")
     return AndroidSqliteDriver(PokemonDatabase.Schema, androidContext(), "${DatabaseConstants.name}.db")
 }
