@@ -36,12 +36,6 @@ internal fun MainContent(
         modifier = modifier
             .verticalScroll(rememberScrollState())
     ) {
-//        LaunchedEffect(Unit) {
-//            while (true) {
-//                onEvent(MainStore.Intent.InputPokemonSearch((1..1000).random().toString()))
-//                delay(10)
-//            }
-//        }
 
         Text(
             text = "What Pokemon are you looking for ?",
