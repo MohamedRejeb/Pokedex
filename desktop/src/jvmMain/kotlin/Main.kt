@@ -29,7 +29,10 @@ fun main() {
     }
 
     application {
-        Window(onCloseRequest = ::exitApplication) {
+        Window(
+            title = "Pokedex",
+            onCloseRequest = ::exitApplication
+        ) {
             ContentView(
                 component = rootComponent
             )
