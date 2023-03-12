@@ -7,7 +7,7 @@ import com.mocoding.pokedex.core.database.sqlDriverFactory
 import org.koin.dsl.module
 
 val databaseModule = module {
-    factory { sqlDriverFactory() }
+    factory { suspend { sqlDriverFactory() } }
     single { createDatabase(driver = get()) }
     single { PokemonDao(pokemonDatabase = get()) }
     single { PokemonInfoDao(pokemonDatabase = get()) }

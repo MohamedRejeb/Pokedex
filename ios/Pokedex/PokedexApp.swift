@@ -11,6 +11,10 @@ import shared
 
 @main
 struct PokedexApp: App {
+    @Environment(\.scenePhase) private var scenePhase
+    
+    private let lifecycle = LifecycleRegistry()
+    
     var body: some Scene {
         WindowGroup {
             GeometryReader { geo in
@@ -22,6 +26,18 @@ struct PokedexApp: App {
                 .onTapGesture {
                     // Hide keyboard on tap outside of TextField
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
+                .onChange(of: scenePhase) { phase in
+                    switch phase {
+                        case .active:
+                            print(">> your code is here on scene become active")
+                        case .inactive:
+                            print(">> your code is here on scene become inactive")
+                        case .background:
+                            print(">> your code is here on scene go background")
+                        default:
+                            print(">> do something else in future")
+                    }
                 }
             }
         }

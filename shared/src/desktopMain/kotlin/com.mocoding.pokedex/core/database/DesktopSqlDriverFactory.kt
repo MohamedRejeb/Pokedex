@@ -6,7 +6,7 @@ import org.koin.core.scope.Scope
 import java.io.File
 
 
-actual fun Scope.sqlDriverFactory(): SqlDriver {
+actual suspend fun Scope.sqlDriverFactory(): SqlDriver {
     val databasePath = File(System.getProperty("java.io.tmpdir"), "${DatabaseConstants.name}.db")
     val driver = JdbcSqliteDriver(url = "jdbc:sqlite:${databasePath.path}")
     PokemonDatabase.Schema.create(driver)

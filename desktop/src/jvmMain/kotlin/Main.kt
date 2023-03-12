@@ -13,8 +13,6 @@ import javax.swing.SwingUtilities
 fun main() {
     initKoin(enableNetworkLogs = false)
 
-//    overrideSchedulers(main = Dispatchers.Main::asScheduler)
-
     val rootComponent = invokeOnAwtSync {
         setMainThreadId(Thread.currentThread().id)
 

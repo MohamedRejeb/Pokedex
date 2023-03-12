@@ -1,6 +1,6 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import com.mocoding.pokedex.Configuration
 import com.mocoding.pokedex.Deps
+import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.targets
 
 plugins {
     kotlin("multiplatform")
@@ -16,8 +16,26 @@ plugins {
 kotlin {
     jvm("desktop")
     android()
+    js(IR) { browser() }
     ios()
     iosSimulatorArm64()
+
+    targets.forEach { kotlinTarget ->
+        kotlinTarget.compilations.configureEach {
+            println(platformType)
+            if (name != "jsBrowserDevelopmentRun") {
+                compileTaskProvider.configure {
+                    println(name)
+                    println(this.compilerOptions)
+                    println(this.dependsOn)
+                    println(this.actions)
+                    println(this.taskDependencies)
+//                    this.enabled = name != "compileKotlinJs"
+                }
+            }
+//                    compileKotlinTask.enabled = platformType != org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType.js
+        }
+    }
 
     cocoapods {
         summary = "Pokedex the Shared Module"
@@ -87,6 +105,7 @@ kotlin {
 
                 // Image Loading
                 api(Deps.Github.imageLoader)
+                api(Deps.ArkIvanov.Essenty.lifecycle)
             }
         }
         val commonTest by getting {
@@ -110,13 +129,32 @@ kotlin {
 
         val desktopMain by getting {
             dependsOn(commonMain)
-            
+
             dependencies {
                 // Ktor
                 implementation(Deps.Io.Ktor.ktorClientJava)
 
                 // SqlDelight
                 implementation(Deps.CashApp.SQLDelight.sqliteDriver)
+            }
+        }
+
+        val jsMain by getting {
+            dependsOn(commonMain)
+
+            dependencies {
+//                implementation("io.ktor:ktor-client-js:2.2.1")
+//                implementation("io.ktor:ktor-client-json-js:2.1.0")
+//                implementation(compose.web.core)
+//                implementation(compose.runtime)
+                // Ktor
+                implementation(Deps.Io.Ktor.ktorClientJs)
+
+                // SqlDelight
+                api(Deps.ArkIvanov.Essenty.lifecycle)
+                implementation(Deps.CashApp.SQLDelight.sqljsDriver)
+                implementation(npm("sql.js", "1.6.2"))
+                implementation(devNpm("copy-webpack-plugin", "9.1.0"))
             }
         }
 
@@ -146,8 +184,6 @@ kotlin {
         kotlinOptions.jvmTarget = "11"
     }
 }
-
-
 
 android {
     namespace = "com.mocoding.pokedex"

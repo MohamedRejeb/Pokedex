@@ -8,6 +8,11 @@ object Deps {
 
                 const val kotlinxSerializationJson = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.serialization}"
             }
+
+            object KotlinWrappers {
+                const val kotlinWrappersBom = "org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom:${Versions.kotlinWrappersBom}"
+                const val kotlinStyled = "org.jetbrains.kotlin-wrappers:kotlin-styled"
+            }
         }
     }
 
@@ -22,6 +27,7 @@ object Deps {
             const val ktorClientAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
             const val ktorClientDarwin = "io.ktor:ktor-client-darwin:${Versions.ktor}"
             const val ktorClientJava = "io.ktor:ktor-client-java:${Versions.ktor}"
+            const val ktorClientJs = "io.ktor:ktor-client-js:${Versions.ktor}"
         }
     }
 
@@ -58,6 +64,10 @@ object Deps {
         object Decompose {
             const val decompose = "com.arkivanov.decompose:decompose:${Versions.decompose}"
             const val extensionsCompose = "com.arkivanov.decompose:extensions-compose-jetbrains:${Versions.decompose}"
+        }
+
+        object Essenty {
+            const val lifecycle = "com.arkivanov.essenty:lifecycle:${Versions.essenty}"
         }
     }
 

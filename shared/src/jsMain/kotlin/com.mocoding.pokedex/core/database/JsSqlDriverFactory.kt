@@ -1,10 +1,11 @@
 package com.mocoding.pokedex.core.database
 
 import app.cash.sqldelight.db.SqlDriver
-import app.cash.sqldelight.driver.native.NativeSqliteDriver
+import app.cash.sqldelight.driver.sqljs.initSqlDriver
+import kotlinx.coroutines.await
 import org.koin.core.scope.Scope
 
 
 actual suspend fun Scope.sqlDriverFactory(): SqlDriver {
-    return NativeSqliteDriver(PokemonDatabase.Schema, "${DatabaseConstants.name}.db")
+    return initSqlDriver(PokemonDatabase.Schema).await()
 }
