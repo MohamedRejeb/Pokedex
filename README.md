@@ -22,18 +22,18 @@ Pokedex is kotlin multiplatform project with 99% shared code, built with Compose
 ## Screenshots
   ### Android
   
-  <div style="display: flex">
-  <img src="https://user-images.githubusercontent.com/41842296/224555659-f75bcddc-21a9-42f4-804d-198a5f06dcb1.png" width="33%"/>
-  <img src="https://user-images.githubusercontent.com/41842296/224555672-03a6dcd5-f26f-4ecf-aa1e-3db66d278b8b.png" width="33%"/>
-  <img src="https://user-images.githubusercontent.com/41842296/224555677-1fc807fc-57c6-46e0-bb27-afa085181a5c.png" width="33%"/>
+  <div style="display: flex; width: 100%">
+  <img src="https://user-images.githubusercontent.com/41842296/224555659-f75bcddc-21a9-42f4-804d-198a5f06dcb1.png" width="31%"/>
+  <img src="https://user-images.githubusercontent.com/41842296/224555672-03a6dcd5-f26f-4ecf-aa1e-3db66d278b8b.png" width="31%"/>
+  <img src="https://user-images.githubusercontent.com/41842296/224555677-1fc807fc-57c6-46e0-bb27-afa085181a5c.png" width="31%"/>
   </div>
   
   ### IOS
   
   <div style="display: flex">
-  <img src="https://user-images.githubusercontent.com/41842296/224555698-71d1fb5d-9359-483b-8d98-64f952a44a60.png" width="33%"/>
-  <img src="https://user-images.githubusercontent.com/41842296/224555703-5a53cc2c-5375-4b07-bac1-aed03f34ca87.png" width="33%"/>
-  <img src="https://user-images.githubusercontent.com/41842296/224555708-05edf0fa-7b74-4f2b-b4fd-f4d7d82e911b.png" width="33%"/>
+  <img src="https://user-images.githubusercontent.com/41842296/224555698-71d1fb5d-9359-483b-8d98-64f952a44a60.png" width="31%"/>
+  <img src="https://user-images.githubusercontent.com/41842296/224555703-5a53cc2c-5375-4b07-bac1-aed03f34ca87.png" width="31%"/>
+  <img src="https://user-images.githubusercontent.com/41842296/224555708-05edf0fa-7b74-4f2b-b4fd-f4d7d82e911b.png" width="31%"/>
   </div>
   
   ### Desktop
