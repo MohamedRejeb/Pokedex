@@ -17,5 +17,4 @@ dependencyResolutionManagement {
 rootProject.name = "Pokedex"
 include(":android")
 include(":desktop")
-include(":web")
 include(":shared")

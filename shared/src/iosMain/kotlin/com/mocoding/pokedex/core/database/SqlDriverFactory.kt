@@ -5,6 +5,6 @@ import app.cash.sqldelight.driver.native.NativeSqliteDriver
 import org.koin.core.scope.Scope
 
 
-actual suspend fun Scope.sqlDriverFactory(): SqlDriver {
+actual fun Scope.sqlDriverFactory(): SqlDriver {
     return NativeSqliteDriver(PokemonDatabase.Schema, "${DatabaseConstants.name}.db")
 }

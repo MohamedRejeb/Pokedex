@@ -15,6 +15,7 @@
 		EA2CADBC29BC9EC20007AE62 /* PokedexUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2CADBB29BC9EC20007AE62 /* PokedexUITests.swift */; };
 		EA2CADBE29BC9EC20007AE62 /* PokedexUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2CADBD29BC9EC20007AE62 /* PokedexUITestsLaunchTests.swift */; };
 		EA2CADCC29BCA7DB0007AE62 /* ComposeViewControllerToSwiftUi.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2CADCB29BCA7DB0007AE62 /* ComposeViewControllerToSwiftUi.swift */; };
+		EA2CADD029BDF5470007AE62 /* LifecycleHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2CADCF29BDF5470007AE62 /* LifecycleHolder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		EA2CADBD29BC9EC20007AE62 /* PokedexUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EA2CADCA29BCA63F0007AE62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EA2CADCB29BCA7DB0007AE62 /* ComposeViewControllerToSwiftUi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewControllerToSwiftUi.swift; sourceTree = "<group>"; };
+		EA2CADCF29BDF5470007AE62 /* LifecycleHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifecycleHolder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				EA2CADA429BC9EC20007AE62 /* Assets.xcassets */,
 				EA2CADA629BC9EC20007AE62 /* Preview Content */,
 				EA2CADCB29BCA7DB0007AE62 /* ComposeViewControllerToSwiftUi.swift */,
+				EA2CADCF29BDF5470007AE62 /* LifecycleHolder.swift */,
 			);
 			path = Pokedex;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA2CADD029BDF5470007AE62 /* LifecycleHolder.swift in Sources */,
 				EA2CADCC29BCA7DB0007AE62 /* ComposeViewControllerToSwiftUi.swift in Sources */,
 				EA2CADA129BC9EC10007AE62 /* PokedexApp.swift in Sources */,
 			);

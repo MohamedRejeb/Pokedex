@@ -5,20 +5,20 @@
 //  Created by Mohamed Ben Rejeb on 11/3/2023.
 //
 
-import SwiftUI
+import SwiftUI  
 import shared
 
 
 @main
 struct PokedexApp: App {
     @Environment(\.scenePhase) private var scenePhase
-    
-    private let lifecycle = LifecycleRegistry()
+    private var lifecycleHolder: LifecycleHolder { LifecycleHolder() }
     
     var body: some Scene {
         WindowGroup {
             GeometryReader { geo in
                 ComposeViewControllerToSwiftUI(
+                    lifecycle: lifecycleHolder.lifecycle,
                     topSafeArea: Float(geo.safeAreaInsets.top),
                     bottomSafeArea: Float(geo.safeAreaInsets.bottom)
                 )
@@ -26,18 +26,6 @@ struct PokedexApp: App {
                 .onTapGesture {
                     // Hide keyboard on tap outside of TextField
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                }
-                .onChange(of: scenePhase) { phase in
-                    switch phase {
-                        case .active:
-                            print(">> your code is here on scene become active")
-                        case .inactive:
-                            print(">> your code is here on scene become inactive")
-                        case .background:
-                            print(">> your code is here on scene go background")
-                        default:
-                            print(">> do something else in future")
-                    }
                 }
             }
         }

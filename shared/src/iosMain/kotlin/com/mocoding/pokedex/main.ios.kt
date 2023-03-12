@@ -21,12 +21,11 @@ import platform.UIKit.*
 
 @Suppress("unused", "FunctionName")
 fun MainViewController(
+    lifecycle: LifecycleRegistry,
     topSafeArea: Float,
     bottomSafeArea: Float
 ): UIViewController {
     initKoin()
-
-    val lifecycle = LifecycleRegistry()
 
     val rootComponent =
         RootComponent(
