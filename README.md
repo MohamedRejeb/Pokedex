@@ -54,6 +54,10 @@ Pokedex uses [PokeAPI](https://pokeapi.co/) for fetching data related to Pokémo
 - [@M0Coding](https://www.github.com/M0Coding)
 
 
+## Original design
+
+Adapted from [Pokédex Apps design](https://dribbble.com/shots/17332968-Pok-dex-Apps-Design-Exploration/) by [Nur Asmara](https://dribbble.com/nurasmara/).
+
 ## 🔗 Social Links
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mohamed-benrejeb/) <br>
 [Follow me](https://github.com/M0Coding) on GitHub
