@@ -51,7 +51,7 @@ Pokedex uses [PokeAPI](https://pokeapi.co/) for fetching data related to Pokémo
 
 ## Authors
 
-- [@M0Coding](https://www.github.com/M0Coding)
+- [@MohamedRejeb](https://www.github.com/MohamedRejeb)
 
 
 ## Original design
@@ -59,8 +59,8 @@ Pokedex uses [PokeAPI](https://pokeapi.co/) for fetching data related to Pokémo
 Adapted from [Pokédex Apps design](https://dribbble.com/shots/17332968-Pok-dex-Apps-Design-Exploration/) by [Nur Asmara](https://dribbble.com/nurasmara/).
 
 ## 🔗 Social Links
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mohamed-benrejeb/) <br>
-[Follow me](https://github.com/M0Coding) on GitHub
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/MohamedRejeb/) <br>
+[Follow me](https://github.com/MohamedRejeb) on GitHub
 
 
 # License
