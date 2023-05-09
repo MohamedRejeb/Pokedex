@@ -2,10 +2,10 @@ package com.mocoding.pokedex
 
 object Versions {
     const val gradlePlugin = "7.3.0"
-    const val kotlin = "1.8.10"
-    const val compose = "1.3.1"
-    const val composeCompoiler = "1.4.2"
-    const val coroutines = "1.6.4"
+    const val kotlin = "1.8.20"
+    const val compose = "1.4.0"
+    const val composeCompiler = "1.4.2"
+    const val coroutines = "1.7.0"
     const val serialization = "1.4.1"
     const val mviKotlin = "3.1.0"
     const val decompose = "1.0.0-compose-experimental"
