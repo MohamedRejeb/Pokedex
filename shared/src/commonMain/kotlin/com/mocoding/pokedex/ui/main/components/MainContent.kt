@@ -2,17 +2,11 @@ package com.mocoding.pokedex.ui.main.components
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.draw.drawWithCache
-import androidx.compose.ui.geometry.center
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -20,11 +14,7 @@ import com.mocoding.pokedex.core.model.Video
 import com.mocoding.pokedex.ui.main.MainComponent
 import com.mocoding.pokedex.ui.main.state.CategoryState
 import com.mocoding.pokedex.ui.main.store.MainStore
-import com.mocoding.pokedex.ui.theme.*
-import com.seiko.imageloader.rememberAsyncImagePainter
-import kotlinx.coroutines.delay
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun MainContent(
     state: MainStore.State,
@@ -46,6 +36,7 @@ internal fun MainContent(
             modifier = Modifier.padding(horizontal = 20.dp, vertical = 20.dp)
         )
 
+        val containerColor = MaterialTheme.colorScheme.surface.copy(alpha = .2f)
         TextField(
             value = state.search,
             onValueChange = { onEvent(MainStore.Intent.InputPokemonSearch(it)) },
@@ -59,13 +50,16 @@ internal fun MainContent(
                     Icon(Icons.Rounded.Search, contentDescription = "Search Pokemon")
                 }
             },
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = MaterialTheme.colorScheme.surface.copy(alpha = .2f),
-                placeholderColor = MaterialTheme.colorScheme.surface,
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = containerColor,
+                unfocusedContainerColor = containerColor,
+                disabledContainerColor = containerColor,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
                 focusedLeadingIconColor = MaterialTheme.colorScheme.surface,
                 unfocusedLeadingIconColor = MaterialTheme.colorScheme.surface,
-                unfocusedIndicatorColor = Color.Transparent,
-                focusedIndicatorColor = Color.Transparent,
+                focusedPlaceholderColor = MaterialTheme.colorScheme.surface,
+                unfocusedPlaceholderColor = MaterialTheme.colorScheme.surface,
             ),
             shape = MaterialTheme.shapes.extraLarge,
             modifier = Modifier
