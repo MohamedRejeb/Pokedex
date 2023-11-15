@@ -21,7 +21,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.mocoding.pokedex.ui.comingsoon.AsyncImage
+import com.mocoding.pokedex.ui.main.components.AsyncImage
 import com.mocoding.pokedex.ui.details.DetailsComponent
 import com.mocoding.pokedex.ui.details.store.DetailsStore
 import com.mocoding.pokedex.ui.helper.LocalSafeArea

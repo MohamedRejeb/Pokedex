@@ -1,6 +1,5 @@
 package com.mocoding.pokedex.ui.main.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -20,7 +19,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.mocoding.pokedex.core.model.Video
 import com.mocoding.pokedex.ui.theme.Black
-import com.seiko.imageloader.rememberAsyncImagePainter
 
 @Composable
 internal fun VideoItem(
@@ -28,8 +26,6 @@ internal fun VideoItem(
     video: Video,
     modifier: Modifier = Modifier
 ) {
-
-    val painter = rememberAsyncImagePainter(video.imageUrl)
 
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -42,8 +38,8 @@ internal fun VideoItem(
         Box(
             contentAlignment = Alignment.Center
         ) {
-            Image(
-                painter = painter,
+            AsyncImage(
+                url = video.imageUrl,
                 contentDescription = video.title,
                 contentScale = ContentScale.Crop,
                 colorFilter = ColorFilter.tint(Black.copy(.5f), BlendMode.Darken),
@@ -52,7 +48,6 @@ internal fun VideoItem(
                     .aspectRatio(1.5f)
                     .clip(MaterialTheme.shapes.medium)
             )
-
 
             Icon(
                 Icons.Rounded.PlayArrow,

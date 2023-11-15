@@ -1,10 +1,7 @@
 package com.mocoding.pokedex.ui.pokedex.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Image
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -17,10 +14,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mocoding.pokedex.core.model.Pokemon
-import com.mocoding.pokedex.ui.comingsoon.AsyncImage
+import com.mocoding.pokedex.ui.main.components.AsyncImage
 import com.mocoding.pokedex.ui.theme.*
-import com.seiko.imageloader.ImageRequestState
-import com.seiko.imageloader.rememberAsyncImagePainter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

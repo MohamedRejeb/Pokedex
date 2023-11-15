@@ -1,6 +1,5 @@
 import com.mocoding.pokedex.Configuration
 import com.mocoding.pokedex.Deps
-import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.targets
 
 plugins {
     kotlin("multiplatform")
@@ -15,22 +14,32 @@ plugins {
 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
 kotlin {
     jvm("desktop")
-    android()
-    ios()
-    iosSimulatorArm64()
 
-    cocoapods {
-        summary = "Pokedex the Shared Module"
-        homepage = "Link to the Shared Module homepage"
-        version = "1.0"
-        ios.deploymentTarget = "14.1"
-        podfile = project.file("../ios/Podfile")
-        framework {
-            baseName = "shared"
-            isStatic = true
+    androidTarget{
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = "21"
+            }
+        }
+    }
 
-            export(Deps.ArkIvanov.Decompose.decompose)
-            export(Deps.ArkIvanov.Essenty.lifecycle)
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64(),
+    ).forEach { _ ->
+        cocoapods {
+            summary = "Pokedex the Shared Module"
+            homepage = "Link to the Shared Module homepage"
+            version = "1.0.0"
+            ios.deploymentTarget = "14.1"
+            podfile = project.file("../ios/Podfile")
+            framework {
+                baseName = "shared"
+                isStatic = true
+                export(Deps.ArkIvanov.Decompose.decompose)
+                export(Deps.ArkIvanov.Essenty.lifecycle)
+            }
         }
     }
     
@@ -124,9 +133,15 @@ kotlin {
             }
         }
 
-        val iosMain by getting {
-            dependsOn(commonMain)
+        val iosX64Main by getting
+        val iosArm64Main by getting
+        val iosSimulatorArm64Main by getting
 
+        val iosMain by creating {
+            dependsOn(commonMain)
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+            iosSimulatorArm64Main.dependsOn(this)
             dependencies {
                 // Ktor
                 implementation(Deps.Io.Ktor.ktorClientDarwin)
@@ -135,19 +150,22 @@ kotlin {
                 implementation(Deps.CashApp.SQLDelight.nativeDriver)
             }
         }
-        val iosSimulatorArm64Main by getting {
-            dependsOn(iosMain)
-        }
-        val iosTest by getting {
+
+        val iosX64Test by getting
+        val iosArm64Test by getting
+        val iosSimulatorArm64Test by getting
+
+        val iosTest by creating {
             dependsOn(commonTest)
+            iosX64Test.dependsOn(this)
+            iosArm64Test.dependsOn(this)
+            iosSimulatorArm64Test.dependsOn(this)
         }
-        val iosSimulatorArm64Test by getting {
-            dependsOn(iosTest)
-        }
+
     }
 
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions.jvmTarget = "11"
+        kotlinOptions.jvmTarget = "21"
     }
 }
 
@@ -156,11 +174,10 @@ android {
     compileSdk = Configuration.compileSdk
     defaultConfig {
         minSdk = Configuration.minSdk
-        targetSdk = Configuration.targetSdk
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 }
 
