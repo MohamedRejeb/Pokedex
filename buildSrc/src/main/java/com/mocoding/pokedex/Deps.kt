@@ -16,6 +16,12 @@ object Deps {
         }
     }
 
+    object Androidx {
+        object Activity {
+            const val activityCompose = "androidx.activity:activity-compose:${Versions.activityCompose}"
+        }
+    }
+
     object Io {
         object Ktor {
             const val ktorClientCore = "io.ktor:ktor-client-core:${Versions.ktor}"

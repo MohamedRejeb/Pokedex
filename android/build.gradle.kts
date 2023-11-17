@@ -19,32 +19,47 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = Versions.composeCompiler
     }
     packaging {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            pickFirsts.add(
+                "META-INF/INDEX.LIST"
+            )
+            excludes.addAll(
+                listOf(
+                    "META-INF/AL2.0",
+                    "META-INF/LGPL2.1",
+                ),
+            )
         }
     }
     buildTypes {
+
         getByName("release") {
+            isMinifyEnabled = true
+        }
+
+        getByName("debug") {
             isMinifyEnabled = false
         }
+
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "21"
+        jvmTarget = "11"
     }
 }
 
 dependencies {
     implementation(project(":shared"))
-    implementation("androidx.activity:activity-compose:1.8.0")
+    implementation(Deps.Androidx.Activity.activityCompose)
 
     // Koin
     with(Deps.Koin) {

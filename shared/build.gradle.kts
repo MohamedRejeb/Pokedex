@@ -13,12 +13,14 @@ plugins {
 
 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
 kotlin {
-    jvm("desktop")
+    jvm("desktop") {
+        jvmToolchain(11)
+    }
 
     androidTarget{
         compilations.all {
             kotlinOptions {
-                jvmTarget = "21"
+                jvmTarget = "11"
             }
         }
     }
@@ -166,7 +168,7 @@ kotlin {
     }
 
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions.jvmTarget = "21"
+        kotlinOptions.jvmTarget = "11"
     }
 }
 
@@ -177,8 +179,8 @@ android {
         minSdk = Configuration.minSdk
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 }
 
