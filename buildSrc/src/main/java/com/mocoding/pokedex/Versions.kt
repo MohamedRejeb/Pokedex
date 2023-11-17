@@ -16,4 +16,5 @@ object Versions {
     const val imageLoader = "1.7.1"
     const val logbackClassic = "1.4.11"
     const val kotlinWrappersBom = "1.0.0-pre.641"
+    const val touchlab = "2.0.5"
 }

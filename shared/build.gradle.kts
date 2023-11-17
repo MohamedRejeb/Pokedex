@@ -23,23 +23,21 @@ kotlin {
         }
     }
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64(),
-    ).forEach { _ ->
-        cocoapods {
-            summary = "Pokedex the Shared Module"
-            homepage = "Link to the Shared Module homepage"
-            version = "1.0.0"
-            ios.deploymentTarget = "14.1"
-            podfile = project.file("../ios/Podfile")
-            framework {
-                baseName = "shared"
-                isStatic = true
-                export(Deps.ArkIvanov.Decompose.decompose)
-                export(Deps.ArkIvanov.Essenty.lifecycle)
-            }
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    cocoapods {
+        summary = "Pokedex the Shared Module"
+        homepage = "Link to the Shared Module homepage"
+        version = "1.0.0"
+        ios.deploymentTarget = "14.1"
+        podfile = project.file("../ios/Podfile")
+        framework {
+            baseName = "shared"
+            isStatic = true
+            export(Deps.ArkIvanov.Decompose.decompose)
+            export(Deps.ArkIvanov.Essenty.lifecycle)
         }
     }
     
@@ -148,6 +146,9 @@ kotlin {
 
                 // SqlDelight
                 implementation(Deps.CashApp.SQLDelight.nativeDriver)
+
+                // TouchLab
+                implementation(Deps.Touchlab.statelyCommon)
             }
         }
 

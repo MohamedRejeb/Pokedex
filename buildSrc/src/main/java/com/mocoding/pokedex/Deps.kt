@@ -74,4 +74,8 @@ object Deps {
     object Github {
         const val imageLoader = "io.github.qdsfdhvh:image-loader:${Versions.imageLoader}"
     }
+
+    object Touchlab {
+        const val statelyCommon = "co.touchlab:stately-common:${Versions.touchlab}"
+    }
 }
