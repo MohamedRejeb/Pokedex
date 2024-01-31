@@ -13,33 +13,33 @@ plugins {
 
 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
 kotlin {
-    jvm("desktop")
+    jvm("desktop") {
+        jvmToolchain(11)
+    }
 
     androidTarget{
         compilations.all {
             kotlinOptions {
-                jvmTarget = "21"
+                jvmTarget = "11"
             }
         }
     }
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64(),
-    ).forEach { _ ->
-        cocoapods {
-            summary = "Pokedex the Shared Module"
-            homepage = "Link to the Shared Module homepage"
-            version = "1.0.0"
-            ios.deploymentTarget = "14.1"
-            podfile = project.file("../ios/Podfile")
-            framework {
-                baseName = "shared"
-                isStatic = true
-                export(Deps.ArkIvanov.Decompose.decompose)
-                export(Deps.ArkIvanov.Essenty.lifecycle)
-            }
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    cocoapods {
+        summary = "Pokedex the Shared Module"
+        homepage = "Link to the Shared Module homepage"
+        version = "1.0.0"
+        ios.deploymentTarget = "14.1"
+        podfile = project.file("../ios/Podfile")
+        framework {
+            baseName = "shared"
+            isStatic = true
+            export(Deps.ArkIvanov.Decompose.decompose)
+            export(Deps.ArkIvanov.Essenty.lifecycle)
         }
     }
     
@@ -148,6 +148,9 @@ kotlin {
 
                 // SqlDelight
                 implementation(Deps.CashApp.SQLDelight.nativeDriver)
+
+                // TouchLab
+                implementation(Deps.Touchlab.statelyCommon)
             }
         }
 
@@ -165,7 +168,7 @@ kotlin {
     }
 
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions.jvmTarget = "21"
+        kotlinOptions.jvmTarget = "11"
     }
 }
 
@@ -176,8 +179,8 @@ android {
         minSdk = Configuration.minSdk
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 }
 

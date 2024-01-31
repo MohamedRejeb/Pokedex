@@ -16,6 +16,12 @@ object Deps {
         }
     }
 
+    object Androidx {
+        object Activity {
+            const val activityCompose = "androidx.activity:activity-compose:${Versions.activityCompose}"
+        }
+    }
+
     object Io {
         object Ktor {
             const val ktorClientCore = "io.ktor:ktor-client-core:${Versions.ktor}"
@@ -73,5 +79,9 @@ object Deps {
 
     object Github {
         const val imageLoader = "io.github.qdsfdhvh:image-loader:${Versions.imageLoader}"
+    }
+
+    object Touchlab {
+        const val statelyCommon = "co.touchlab:stately-common:${Versions.touchlab}"
     }
 }
