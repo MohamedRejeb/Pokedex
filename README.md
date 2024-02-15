@@ -39,7 +39,35 @@ Pokedex is kotlin multiplatform project with 99% shared code, built with Compose
   ### Desktop
   <img width="1511" alt="Screenshot 2023-03-12 at 4 44 04 PM" src="https://user-images.githubusercontent.com/41842296/224555755-5d033ac5-061e-41d7-92b1-4e5c807dfb67.png">
 
+## Installation
+  ### Android
+  Requires Android Studio and functioning Android device
+  1. Download zip file of project
+  2. Extract zip file
+  3. Open extracted file in android studio using File > Open...
+  4. In android studio, build the project using Build > Build Apk(s)
+  5. Open and run the apk file on an android device
+  6. Allow permissions for app to install when prompted
+  7. Installation complete
+     
+  ### IOS
+  Requires Xcode, iTunes, and funtioning IOS device
+  1. Download project and open in Xcode
+  2. Select device target as Generic IOS device or Any IOS device (arm64)
+  3. Under the Product menu, click Clean, then Archive
+  4. Selet the app and Export it, select Ad Hoc, Development, or Enterprise as method
+  5. Select Distribution Certificate and Provisioning Profile to genere the ipa
+  6. Export the ipa to desired location
+  7. Open iTunes and connect IOS device to computer using a usb cable
+  8. Transfer the ipa file to the connected device
+  9. The ipa will install and installation is complete
 
+  ### Desktop
+  Requires Gradle
+  1. Clone the repository to your local device
+  2. Run "gradle init --dsl kotlin" in command line to initialize Gradle
+  3. Build and invoke the project using "./gradlew build"
+  4. Installation is complete and project is built
 
 ## PokeAPI
 
