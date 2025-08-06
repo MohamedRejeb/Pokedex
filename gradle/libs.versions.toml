@@ -16,6 +16,13 @@ imageLoader = "1.7.1"
 logbackClassic = "1.2.11"
 kotlinWrappersBom = "1.0.0-pre.641"
 touchlab = "2.0.5"
+compileSdk = "34"
+targetSdk = "34"
+minSdk = "24"
+appMajorVersion = "1"
+appMinorVersion = "0"
+appPatchVersion = "0"
+appVersionCode = "1"
 
 [libraries]
 # Org.JetBrains.Kotlinx
