@@ -1,11 +1,11 @@
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    kotlin("plugin.serialization")
-    id("com.android.library")
-    id("org.jetbrains.compose")
-    id("kotlin-parcelize")
-    id("app.cash.sqldelight")
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.native.cocoapods)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.sqldelight)
 }
 
 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)

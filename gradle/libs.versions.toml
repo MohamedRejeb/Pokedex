@@ -1,5 +1,5 @@
 [versions]
-gradlePlugin = "8.1.3"
+agp = "8.1.3"
 kotlin = "1.9.20"
 activityCompose = "1.8.0"
 compose = "1.5.10"
@@ -58,7 +58,6 @@ sqldelight-sqljs-driver = { module = "app.cash.sqldelight:sqljs-driver", version
 sqldelight-coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
 sqldelight-primitive-adapters = { module = "app.cash.sqldelight:primitive-adapters", version.ref = "sqlDelight" }
 
-
 # Koin
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
@@ -84,14 +83,13 @@ touchlab-stately-common = { module = "co.touchlab:stately-common", version.ref =
 
 
 [plugins]
-# Assuming common plugin IDs. These might need adjustment based on actual plugin IDs.
-# The `sqldelight-gradle-plugin` is listed above in libraries as well, which is typical for plugins applied from the catalog.
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
-# Other plugins like kotlin-android, kotlin-multiplatform, android-application, android-library etc.
-# are usually defined with their versions directly in buildscripts or via the [versions] block if their versions are managed here.
-# For example, if you manage Kotlin plugin version via the catalog:
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-# android-application = { id = "com.android.application", version.ref = "gradlePlugin" } # For com.android.application
-# android-library = { id = "com.android.library", version.ref = "gradlePlugin" } # For com.android.library
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-native-cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
