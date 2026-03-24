@@ -1,12 +1,14 @@
 plugins {
     //trick: for the same plugin versions in all sub-modules
-    kotlin("android") version "1.9.20" apply false
-    kotlin("multiplatform") version "1.9.20" apply false
-    kotlin("plugin.serialization") version "1.9.20" apply false
-    id("app.cash.sqldelight") version "2.0.0" apply false
-    id("com.android.application") version "8.1.3" apply false
-    id("com.android.library") version "8.1.3" apply false
-    id("org.jetbrains.compose") version "1.5.10" apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
+    alias(libs.plugins.sqldelight) apply false
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.jetbrains.compose) apply false
+    alias(libs.plugins.kotlin.native.cocoapods) apply false
+    alias(libs.plugins.kotlin.parcelize) apply false
 }
 
 allprojects {
